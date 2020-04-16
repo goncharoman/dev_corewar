@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/04/16 23:33:01 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/04/16 23:41:18 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,9 +99,9 @@ clean:
 	@ rm -rf $(TEMP_DIR)
 	@ printf "$(F_DIM)$(F_BOLD)$(GRAY)%-10s$(RESET) $(YELLOW)temp files were deleted$(RESET)\n" "(corewar)"
 
-fclean:
+fclean: clean
 	@ $(MAKE) -sC $(LIB_DIR) fclean
-	@ rm -rf $(ASM_NAME) $(COREWAR_NAME)
+	@ rm -rf $(ASM_NAME)
 	@ printf "$(F_DIM)$(F_BOLD)$(GRAY)%-10s$(RESET) $(F_BOLD)$(ASM_NAME)$(RESET) $(YELLOW)were deleted$(RESET)\n" "(corewar)"
 
 re: fclean all
