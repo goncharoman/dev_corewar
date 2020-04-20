@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/04/16 23:41:18 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/04/20 18:48:12 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,6 @@ SOURCES_DIR = ./sources
 LIB_DIR = ./lib
 TEMP_DIR = ./temp
 
-ASM_SOURCES_DIR = $(SOURCES_DIR)/asm
-COREWAR_SOURSES_DIR = $(SOURCES_DIR)/corewar
-
-
 # ASM
 #   headers
 ASM_HEADERS_LIST = \
@@ -48,15 +44,34 @@ ASM_HEADERS_LIST = \
 ASM_HEADERS = $(addprefix $(HEADERS_DIR)/, $(ASM_HEADERS_LIST))
 
 #   sources
-ASM_SOURCES_LIST = \
+ASM_SOURCES_MAIN_DIR = asm
+ASM_SOURCES_INNER_DIR = $(addprefix $(ASM_SOURCES_MAIN_DIR)/, \
+	parser \
+	token \
+	)
+ASM_SOURCES = $(addprefix $(ASM_SOURCES_MAIN_DIR)/, \
 	asm.c \
-	greeting.c
-ASM_SOURCES = $(addprefix $(ASM_SOURCES_DIR)/, $(ASM_SOURCES_LIST))
+	filename.c \
+	helpers.c \
+	print_help.c \
+	translator.c \
+ 	)
+ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/parser/, \
+	helpers.c \
+	offsets.c \
+	parse.c \
+	parse_args.c \
+	)
+ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/token/, \
+	add.c \
+	helpers.c \
+	token.c \
+	)
 
 #   temps
-ASM_TEMP_DIR = $(TEMP_DIR)/asm
-ASM_TEMP_FILES_LIST = $(ASM_SOURCES_LIST:.c=.o)
-ASM_TEMP_FILES = $(addprefix $(ASM_TEMP_DIR)/, $(ASM_TEMP_FILES_LIST))
+ASM_TEMP_DIRS = $(addprefix $(TEMP_DIR)/, $(ASM_SOURCES_MAIN_DIR))
+ASM_TEMP_DIRS += $(addprefix $(TEMP_DIR)/, $(ASM_SOURCES_INNER_DIR))
+ASM_TEMP_FILES = $(addprefix $(TEMP_DIR)/, $(ASM_SOURCES:.c=.o))
 
 
 # COREWAR
@@ -69,7 +84,7 @@ LIB_CONNECT = -lft -L$(LIB_DIR)
 
 # COMP
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -g
 
 INCLUDES = \
 	-I$(HEADERS_DIR)\
@@ -79,7 +94,7 @@ INCLUDES = \
 
 all: $(ASM_NAME)
 
-$(ASM_NAME): $(LIB) $(ASM_TEMP_DIR) $(ASM_TEMP_FILES)
+$(ASM_NAME): $(LIB) $(TEMP_DIR) $(ASM_TEMP_FILES)
 	@ printf "$(CLEARL)\r"
 	@ $(CC) $(FLAGS) $(LIB_CONNECT) $(INCLUDES) $(ASM_TEMP_FILES) -o $(ASM_NAME)
 	@ printf "$(F_DIM)$(F_BOLD)$(GRAY)%-10s$(RESET) $(F_BOLD)$(ASM_NAME)$(RESET) $(GREEN)were created!$(RESET)\n" "(corewar)"
@@ -87,10 +102,10 @@ $(ASM_NAME): $(LIB) $(ASM_TEMP_DIR) $(ASM_TEMP_FILES)
 $(LIB):
 	@ $(MAKE) -sC $(LIB_DIR)
 
-$(ASM_TEMP_DIR):
-	@ mkdir -p $(ASM_TEMP_DIR)
+$(TEMP_DIR):
+	@ mkdir -p $(ASM_TEMP_DIRS)
 
-$(ASM_TEMP_DIR)/%.o : $(ASM_SOURCES_DIR)/%.c $(ASM_HEADERS)
+$(TEMP_DIR)/%.o : $(SOURCES_DIR)/%.c $(ASM_HEADERS)
 	@ $(CC) $(FLAGS) -c $(INCLUDES) $< -o $@
 	@ printf "$(F_DIM)$(F_BOLD)$(GRAY)%-10s$(RESET) $(YELLOW)compile:$(RESET) %21s\r" "(corewar)" "$(notdir $@)"
 

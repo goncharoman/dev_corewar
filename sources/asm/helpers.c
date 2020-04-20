@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/16 21:45:32 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/17 13:19:34 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/04/17 13:23:57 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/04/20 16:23:39 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int		main(int argc, char **argv)
+void	terminate(char *message)
 {
-	errno = 0;
-	if (argc == 2 && is_filename(argv[1], ASM_FILENAME_SUFFIX))
-		translate(argv[1]);
+	if (errno == 0)
+		ft_putendl_fd(message, 2);
 	else
-		print_help();
-	return (0);
+		perror(message);
+	exit(1);
 }

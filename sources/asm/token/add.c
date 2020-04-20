@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   add.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/16 21:45:32 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/17 13:19:34 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/04/17 21:02:42 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/04/20 18:21:02 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int		main(int argc, char **argv)
+void	add_token(t_list **tokens, t_token *new_token)
 {
-	errno = 0;
-	if (argc == 2 && is_filename(argv[1], ASM_FILENAME_SUFFIX))
-		translate(argv[1]);
-	else
-		print_help();
-	return (0);
+	t_list	*tmp;
+
+	if (!(tmp = ft_lstnew(new_token, sizeof(t_token))))
+		exit(-1);
+	ft_lstappend(tokens, tmp);
 }

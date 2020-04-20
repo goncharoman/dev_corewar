@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/16 21:45:32 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/17 13:19:34 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/04/20 17:16:43 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/04/20 17:42:51 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int		main(int argc, char **argv)
+char	*get_value(t_parseln *parseln, unsigned start)
 {
-	errno = 0;
-	if (argc == 2 && is_filename(argv[1], ASM_FILENAME_SUFFIX))
-		translate(argv[1]);
-	else
-		print_help();
-	return (0);
+	char	*value;
+
+	if (!(value = ft_strsub(parseln->line, start, parseln->col - start)))
+		terminate("alocation error: get_token_value");
+	return (value);
 }

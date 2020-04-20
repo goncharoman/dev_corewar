@@ -2,5 +2,8 @@
 	"C_Cpp.default.includePath": [
 		"${workspaceFolder}/includes/**",
 		"${workspaceFolder}/lib/includes/**"
-	]
+	],
+	"files.associations": {
+		"**/*.h": "c",
+	}
 }

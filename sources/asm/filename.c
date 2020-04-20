@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   filename.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/16 21:45:32 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/17 13:19:34 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/04/17 12:45:12 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/04/17 22:14:30 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int		main(int argc, char **argv)
+t_bool	is_filename(const char *filename, const char *suffix)
 {
-	errno = 0;
-	if (argc == 2 && is_filename(argv[1], ASM_FILENAME_SUFFIX))
-		translate(argv[1]);
-	else
-		print_help();
-	return (0);
+	if (filename && suffix)
+		return (filename - ft_strstr(filename, suffix) < 0 &&
+			!ft_strcmp(ft_strstr(filename, suffix), suffix));
+	return (false);
 }
+
