@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 21:41:30 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/20 19:35:50 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/21 18:45:07 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdio.h>
 
 # include <op.h>
+
+# include <test.h>
 #endif
 
 # define REG_CHAR			'r'
@@ -67,21 +69,25 @@ void		fill_token(t_token *token, char *value, t_type type, unsigned row,
 void		add_token(t_list **tokens, t_token *new_token);
 char		*get_value(t_parseln *parseln, unsigned start);
 
-void			parse(t_list **tokens, int fd);
-void			offset_whitespaces(t_parseln *parseln);
-void			offset_comment(t_parseln *parseln);
+void		parse(t_list **tokens, int fd);
+void		skip_whitespaces(t_parseln *parseln);
+void		skip_comment(t_parseln *parseln);
 
-t_bool			is_whitespace(int c);
-t_bool			is_spec_smb(int c);
-t_bool 			is_reg(char *value);
+t_bool		is_whitespace(int c);
+t_bool		is_spec_smb(int c);
+t_bool 		is_reg(char *value);
 
-t_bool	is_filename(const char *filename, const char *suffix);
+t_bool		is_filename(const char *filename, const char *suffix);
 
-void	translate(const char *filename);
+void		translate(const char *filename);
 
-int		print_help();
+int			print_help();
 
-void	terminate(char *message);
+void		terminate(char *message);
 
-void	parse_str(t_list **tokens, t_parseln *parseln, t_token *token);
-void	parse_num(t_list **tokens, t_parseln *parseln, t_token *token);
+void		parse_deep(t_list **tokens, t_parseln *parseln, t_token *token);
+void		parse_str(t_list **tokens, t_parseln *parseln, t_token *token);
+void		parse_num(t_list **tokens, t_parseln *parseln, t_token *token);
+
+void		add_endtoken(t_list **tokens);
+void		add_endlntoken(t_list **tokens);

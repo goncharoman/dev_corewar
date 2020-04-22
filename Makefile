@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/04/20 18:48:12 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/04/21 15:29:58 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ TEMP_DIR = ./temp
 #   headers
 ASM_HEADERS_LIST = \
 	op.h\
-	asm.h
+	asm.h \
+	test.h
 ASM_HEADERS = $(addprefix $(HEADERS_DIR)/, $(ASM_HEADERS_LIST))
 
 #   sources
@@ -55,10 +56,11 @@ ASM_SOURCES = $(addprefix $(ASM_SOURCES_MAIN_DIR)/, \
 	helpers.c \
 	print_help.c \
 	translator.c \
+	test.c \
  	)
 ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/parser/, \
 	helpers.c \
-	offsets.c \
+	skips.c \
 	parse.c \
 	parse_args.c \
 	)

@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 18:41:05 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/20 21:17:06 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/21 15:29:05 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ static void	parseln_concat(t_parseln *parseln, char **str)
 {
 	char *tmp;
 
-	if (!(tmp = ft_strsepjoin(parseln->line, *str, ' ')))
+	if (!(tmp = ft_strsepjoin(parseln->line, *str, '\n')))
 		exit(1);
-	/* NOTE: если понадобится использовать строку без пробельных символов, то можно убрать их здесь */
 	parseln->row++;
-	parseln->size += ft_strlen(*str);
+	parseln->size += ft_strlen(*str) + 1;
 	ft_strdel(&parseln->line);
 	ft_strdel(str);
 	parseln->line = tmp;
@@ -52,5 +51,48 @@ void		parse_str(t_list **tokens, t_parseln *parseln, t_token *token)
 
 void		parse_num(t_list **tokens, t_parseln *parseln, t_token *token)
 {
-	return;
+	unsigned start;
+	unsigned tmp;
+
+	start = parseln->col;
+	parseln->col += *(parseln->line + parseln->col) == '-';
+	tmp = parseln->col;
+	while (ft_isdigit(*(parseln->line + parseln->col)))
+		parseln->col++;
+	if ((parseln->col - tmp) &&
+		(token->type == DIR || is_spec_smb(*(parseln->line + parseln->col))))
+	{
+		token->value = get_value(parseln, start);
+		add_token(tokens, token);
+	}
+	else if (token->type != DIR)
+	{
+		parseln->col = start;
+		parse_deep(tokens, parseln, token);
+	}
+	else
+		exit(1);
+}
+
+
+void		parse_deep(t_list **tokens, t_parseln *parseln, t_token *token)
+{
+	unsigned start;
+
+	start = parseln->col;
+	while (parseln->line[parseln->col] &&
+			ft_strchr(LABEL_CHARS, parseln->line[parseln->col]))
+		parseln->col++;
+	if (parseln->col - start)
+	{
+		token->value = get_value(parseln, start);
+		if (parseln->line[parseln->col] == LABEL_CHAR && parseln->col++)
+			token->type = LBL;
+		else if (is_spec_smb(parseln->line[parseln->col]))
+			if (token->type == IND)
+				token->type = is_reg(token->value) ? REG : OPR;
+		add_token(tokens, token);
+	}
+	else
+		exit(1);
 }
