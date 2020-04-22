@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 17:43:52 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/21 18:51:23 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/22 15:36:37 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 static t_type		get_type(t_parseln *parseln)
 {
-	if (*(parseln->line + parseln->col) == SEPARATOR_CHAR && ++parseln->col)
+	if (*(parseln->line + parseln->col) == SEPARATOR_CHAR && ++(parseln->col))
 		return (SEP);
-	if (*(parseln->line + parseln->col) == CMD_CHAR && ++parseln->col)
+	if (*(parseln->line + parseln->col) == CMD_CHAR && ++(parseln->col))
 		return (CMD);
-	if (*(parseln->line + parseln->col) == DIRECT_CHAR && ++parseln->col)
+	if (*(parseln->line + parseln->col) == DIRECT_CHAR && ++(parseln->col))
 	{
-		if (*(parseln->line + parseln->col) == LABEL_CHAR && ++parseln->col)
+		if (*(parseln->line + parseln->col) == LABEL_CHAR && ++(parseln->col))
 			return (DIRL);
 		return (DIR);
 	}
-	if (*(parseln->line + parseln->col) == '\"' && ++parseln->col)
+	if (*(parseln->line + parseln->col) == '\"' && ++(parseln->col))
 		return (STR);
-	if (*(parseln->line + parseln->col) == LABEL_CHAR && ++parseln->col)
+	if (*(parseln->line + parseln->col) == LABEL_CHAR && ++(parseln->col))
 		return (INDL);
 	return (IND);
 }
@@ -67,9 +67,10 @@ void					parse(t_list **tokens, int fd)
 				parse_chunk(tokens, &parseln);
 		}
 		if (parseln.size > 0 && parseln.size == parseln.col)
-			add_endlntoken(tokens);
+			add_endtoken(tokens, ENDLN, parseln.row, parseln.col + 1);
 	}
-	add_endtoken(tokens);
+	add_endtoken(tokens, END, parseln.row + 1, 0);
+	print_tokens(tokens);
 	if (err == -1)
 		terminate("error read from file");
 }
