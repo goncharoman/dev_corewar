@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:02:42 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/21 18:47:06 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/22 14:13:21 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,23 @@ void	add_token(t_list **tokens, t_token *new_token)
 	ft_lstappend(tokens, tmp);
 }
 
-void	add_endtoken(t_list **tokens)
+void	add_endtoken(t_list **tokens, t_type type, unsigned row, unsigned col)
 {
 	t_list	*tail;
 	t_token	*token;
 
-	if ((tail = ft_lsttail(tokens)))
+	if ((tail = ft_lsttail(tokens)) && (type == END || type == ENDLN))
 	{
-		if ((token = tail->content)->type == ENDLN)
+		if (((token = tail->content)->type == ENDLN && type == END) ||
+			(token->type != ENDLN && type == ENDLN))
 		{
-			tail->next = ft_lstnew(create_token(NULL, END, token->row + 1, 0),
-				sizeof(t_token));
+			if (!(tail->next = ft_lstnew(create_token(NULL, type, row, col),
+				sizeof(t_token))))
 			if (!(tail->next))
 				exit(1);
 		}
-		return ;
 	}
 	else
-		add_token(tokens, create_token(NULL, END, 0, 0));
-}
-
-void	add_endlntoken(t_list **tokens)
-{
-	t_list	*tail;
-	t_token	*token;
-
-	if ((tail = ft_lsttail(tokens)))
-	{
-		if ((token = tail->content)->type != ENDLN)
-		{
-			tail->next = ft_lstnew(
-				create_token(NULL, ENDLN, token->row, token->row),
-				sizeof(t_token));
-			if (!(tail->next))
-				exit(1);
-		}
-	}
+		if (type == END)
+			add_token(tokens, create_token(NULL, END, 0, 0));
 }
