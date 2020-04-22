@@ -6,13 +6,24 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 13:55:47 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/20 18:21:30 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/22 17:18:10 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-t_token		*create_token(char *value, t_type type, unsigned row, unsigned col)
+t_token	*next_token(t_list **head)
+{
+	t_token *token;
+
+	token = NULL;
+	if (head && *head)
+		token = (*head)->content;
+	*head = (*head)->next;
+	return (token);
+}
+
+t_token	*create_token(char *value, t_type type, unsigned row, unsigned col)
 {
 	t_token	*token;
 
