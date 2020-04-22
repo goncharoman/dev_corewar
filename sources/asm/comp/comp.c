@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   translator.c                                       :+:      :+:    :+:   */
+/*   comp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 12:56:35 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/22 16:54:42 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/04/22 14:30:59 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/04/22 16:52:47 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-void	translate(const char *filename)
+void	comp(t_list **tokens, t_program **program)
 {
-	int			fd;
-	t_list		*tokens_list;
-	t_program	*program;
+	t_list	*bgn_token;
 
-	if ((fd = open(filename, O_RDONLY)) == -1)
-		terminate("open file error");
-	tokens_list = NULL;
-	program = NULL;
-	parse(&tokens_list, fd);
-	comp(&tokens_list, &program);
+	if (!*tokens)
+		exit(1);
+	if (!*program)
+		*program = program_init();
+	bgn_token = *tokens;
+	get_program_info(&bgn_token, *program);
 }

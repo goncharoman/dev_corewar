@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   translator.c                                       :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 12:56:35 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/22 16:54:42 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/04/22 15:40:43 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/04/22 16:59:37 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-void	translate(const char *filename)
+t_bool	is_cmd(char *arg, const char *command)
 {
-	int			fd;
-	t_list		*tokens_list;
-	t_program	*program;
-
-	if ((fd = open(filename, O_RDONLY)) == -1)
-		terminate("open file error");
-	tokens_list = NULL;
-	program = NULL;
-	parse(&tokens_list, fd);
-	comp(&tokens_list, &program);
+	if (!arg || !command)
+		return (false);
+	return (!ft_strcmp(arg, command + 1));
 }

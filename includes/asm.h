@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 21:41:30 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/21 18:45:07 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/22 21:39:37 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
-
 # include <op.h>
 
 # include <test.h>
@@ -63,6 +62,15 @@ typedef	struct	s_token
 	unsigned	col;
 }				t_token;
 
+typedef struct	s_program
+{
+	char		*name;
+	char		*comment;
+	uint32_t	*code;
+	unsigned	size;
+}				t_program;
+
+
 t_token		*create_token(char *value, t_type type, unsigned row, unsigned col);
 void		fill_token(t_token *token, char *value, t_type type, unsigned row,
 				unsigned col);
@@ -89,5 +97,16 @@ void		parse_deep(t_list **tokens, t_parseln *parseln, t_token *token);
 void		parse_str(t_list **tokens, t_parseln *parseln, t_token *token);
 void		parse_num(t_list **tokens, t_parseln *parseln, t_token *token);
 
-void		add_endtoken(t_list **tokens);
-void		add_endlntoken(t_list **tokens);
+void		add_endtoken(t_list **tokens, t_type type, unsigned row,
+			unsigned col);
+
+/* token/ */
+t_token		*next_token(t_list **head);
+
+/* comp/ */
+void		comp(t_list **tokens, t_program **program);
+void		get_program_info(t_list **head_lst, t_program *program);
+t_bool		is_cmd(char *arg, const char *command);
+t_program	*program_init();
+void		increase_code_size(t_program *program);
+
