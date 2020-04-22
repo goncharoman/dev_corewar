@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/04/21 15:29:58 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/04/22 16:51:43 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,11 @@
 F_DIM	= \033[2m
 F_BOLD	= \033[1m
 GRAY	= \033[38;5;253m
-RESET	= \e[0m
 ITALIC	= \e[3m
 RED		= \033[38;5;160m
 GREEN	= \033[38;5;35m
 YELLOW	= \033[38;5;184m
+RESET	= \e[0m
 BLUE	= \033[38;5;32m
 
 # ESC
@@ -49,6 +49,7 @@ ASM_SOURCES_MAIN_DIR = asm
 ASM_SOURCES_INNER_DIR = $(addprefix $(ASM_SOURCES_MAIN_DIR)/, \
 	parser \
 	token \
+	comp \
 	)
 ASM_SOURCES = $(addprefix $(ASM_SOURCES_MAIN_DIR)/, \
 	asm.c \
@@ -68,6 +69,12 @@ ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/token/, \
 	add.c \
 	helpers.c \
 	token.c \
+	)
+ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/comp/, \
+	comp.c \
+	helpers.c \
+	init.c \
+	program_info.c \
 	)
 
 #   temps
