@@ -18,7 +18,7 @@ static void print_token(t_token *token)
 		};
 
 
-	printf("%03d [%03d, %03d] (% 5s)   %s\n", n++,
+	printf("%03d [%03d, %03d] (%5s)   %s\n", n++,
 													token->row,
 													token->col,
 													dict[(int)token->type],
