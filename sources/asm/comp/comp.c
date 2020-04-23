@@ -6,11 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 14:30:59 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/22 16:52:47 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/23 22:29:17 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <asm_comp.h>
 
 void	comp(t_list **tokens, t_program **program)
 {
@@ -22,4 +22,5 @@ void	comp(t_list **tokens, t_program **program)
 		*program = program_init();
 	bgn_token = *tokens;
 	get_program_info(&bgn_token, *program);
+	get_program_code(&bgn_token, *program);
 }

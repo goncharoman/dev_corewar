@@ -6,11 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 18:41:05 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/21 15:29:05 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/23 12:20:39 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <asm_parse.h>
 
 static void	parseln_concat(t_parseln *parseln, char **str)
 {
@@ -79,6 +79,7 @@ void		parse_deep(t_list **tokens, t_parseln *parseln, t_token *token)
 {
 	unsigned start;
 
+	/* скипаем ведущий символ (.) */
 	start = parseln->col;
 	while (parseln->line[parseln->col] &&
 			ft_strchr(LABEL_CHARS, parseln->line[parseln->col]))

@@ -6,11 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 16:47:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/22 21:15:06 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/23 21:38:58 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <asm_comp.h>
 
 t_program	*program_init()
 {
@@ -21,6 +21,7 @@ t_program	*program_init()
 	program->name = NULL;
 	program->comment = NULL;
 	program->code = NULL;
+	program->position = 0;
 	program->size = 0;
 	return (program);
 }

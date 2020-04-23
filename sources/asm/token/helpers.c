@@ -6,11 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 17:16:43 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/20 17:42:51 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/23 12:21:00 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <asm_token.h>
 
 char	*get_value(t_parseln *parseln, unsigned start)
 {

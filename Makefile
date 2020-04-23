@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/04/22 16:51:43 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/04/23 22:11:41 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,12 @@ TEMP_DIR = ./temp
 # ASM
 #   headers
 ASM_HEADERS_LIST = \
-	op.h\
 	asm.h \
+	asm_structs.h \
+	asm_comp.h \
+	asm_parse.h \
+	asm_token.h \
+	op.h \
 	test.h
 ASM_HEADERS = $(addprefix $(HEADERS_DIR)/, $(ASM_HEADERS_LIST))
 
@@ -73,8 +77,11 @@ ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/token/, \
 ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/comp/, \
 	comp.c \
 	helpers.c \
-	init.c \
+	op.c \
+	program.c \
+	program_args.c \
 	program_info.c \
+	program_instrct.c \
 	)
 
 #   temps

@@ -6,11 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 18:09:36 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/21 15:34:02 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/23 12:20:49 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <asm_parse.h>
 
 void	skip_whitespaces(t_parseln *parseln)
 {

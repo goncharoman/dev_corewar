@@ -6,11 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 18:19:05 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/20 18:36:26 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/23 12:20:34 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <asm_parse.h>
 
 t_bool	is_whitespace(int c)
 {

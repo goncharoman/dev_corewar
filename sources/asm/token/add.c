@@ -6,11 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:02:42 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/22 14:13:21 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/23 12:20:55 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <asm_token.h>
 
 void	add_token(t_list **tokens, t_token *new_token)
 {

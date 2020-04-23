@@ -6,11 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 14:40:15 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/22 17:17:25 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/23 21:39:23 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <asm_comp.h>
 
 static void get_name(t_token *token, t_program *program)
 {
