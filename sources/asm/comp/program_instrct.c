@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 17:09:49 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/23 22:31:04 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/29 23:18:19 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 
 static void		proc_label(t_token *token, t_program *program)
 {
-	return;
+	t_label	*label;
+
+	if (!(label = find_label(&program->labels, token->value)))
+		add_label(&program->labels,
+			create_label(token->value, program->position));
+	else
+	{
+		if (label->init_position == -1)
+			label->init_position = program->position;
+	}
 }
 
 static uint8_t	proc_arg(t_op *op, t_token *token, t_program *program, int arg)
@@ -24,12 +33,12 @@ static uint8_t	proc_arg(t_op *op, t_token *token, t_program *program, int arg)
 	if (!(op->args_types[arg] & types[token->type]))
 		/* TODO: написать отдельный обработчик ошибок */
 		exit(1);
-	if (token->type == IND || token->type == INDL)
-		proc_ptr(op, token, program);
-	else if (token->type == DIR || token->type == DIRL)
-		proc_num(op, token, program);
+	if (token->type == INDL || token->type == DIRL)
+		write_call(op, token, program);
+	else if (token->type == DIR || token->type == IND)
+		write_dir(op, token, program);
 	else
-		proc_reg(token, program);
+		write_reg(token, program);
 	return (types[token->type]);
 
 }
