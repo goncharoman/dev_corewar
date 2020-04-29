@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 17:09:49 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/29 23:18:19 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/30 01:36:22 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static uint8_t	proc_arg(t_op *op, t_token *token, t_program *program, int arg)
 	if (token->type == INDL || token->type == DIRL)
 		write_call(op, token, program);
 	else if (token->type == DIR || token->type == IND)
-		write_dir(op, token, program);
+		write_num(op, token, program);
 	else
 		write_reg(token, program);
 	return (types[token->type]);

@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 12:17:59 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/30 01:32:38 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/30 01:36:36 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_op		*get_oper(char *oper_name);
 
 void		get_program_code(t_list **head_lst, t_program *program);
 void		write_call(t_op *op, t_token *token, t_program *program);
-void		write_dir(t_op *op, t_token *token, t_program *program);
+void		write_num(t_op *op, t_token *token, t_program *program);
 void		write_reg(t_token *token, t_program *program);
 
 t_label		*create_label(char *name, unsigned position);
