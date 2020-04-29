@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 22:09:07 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/30 01:36:05 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/30 01:55:56 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ void	write_num(t_op *op, t_token *token, t_program *program)
 	size = (token->type == DIR) ? op->tdir_size : IND_SIZE;
 	write_int(program, size,
 		size == 2 ? (int16_t)ft_atoi32(token->value) : ft_atoi32(token->value));
+	program->position += size;
 }
 
 void	write_reg(t_token *token, t_program *program)
 {
 	write_int(program, 1, (int8_t)ft_atoi32(&token->value[1]));
+	program->position += 1;
 }

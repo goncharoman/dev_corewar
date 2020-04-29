@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 15:40:43 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/30 01:20:40 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/30 01:55:31 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	write_int(t_program *program, uint32_t size, int32_t value)
 	n = 0;
 	while (size)
 	{
-		program->code[program->position++ + size - 1] = \
+		program->code[program->position + size - 1] = \
 			(uint8_t)((value >> n) & 0xff);
 		n += 8;
 		size--;

@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 17:09:49 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/30 01:36:22 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/30 02:25:07 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static uint8_t	proc_arg(t_op *op, t_token *token, t_program *program, int arg)
 		write_num(op, token, program);
 	else
 		write_reg(token, program);
-	return (types[token->type]);
+	return (types[token->type] << 2 * (3 - arg));
 
 }
 
