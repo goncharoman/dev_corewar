@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 12:37:54 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/23 22:24:40 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/04/29 22:53:50 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ typedef struct	s_program
 	char		*name;
 	char		*comment;
 	uint8_t		*code;
-	int32_t		position;
-	int32_t		size;
+	uint32_t	position;
+	uint32_t	size;
+	t_list		*labels;
 }				t_program;
 
 typedef struct	s_op
@@ -65,5 +66,20 @@ typedef struct	s_op
 	uint8_t		args_types[3];
 	uint8_t		tdir_size;
 }				t_op;
+
+typedef	struct	s_call
+{
+	unsigned	row;
+	unsigned	col;
+	int32_t		position;
+	uint32_t	size;
+}				t_call;
+
+typedef struct	s_label
+{
+	char		*name;
+	int32_t		init_position;
+	t_list		*calls;
+}				t_label;
 
 #endif

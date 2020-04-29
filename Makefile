@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/04/23 22:11:41 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/04/29 22:21:56 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,8 +75,10 @@ ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/token/, \
 	token.c \
 	)
 ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/comp/, \
+	call.c \
 	comp.c \
 	helpers.c \
+	label.c \
 	op.c \
 	program.c \
 	program_args.c \
