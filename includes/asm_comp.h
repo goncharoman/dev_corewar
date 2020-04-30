@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 12:17:59 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/30 01:36:36 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/01 00:01:55 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ t_label		*find_label(t_list **labels, char *name);
 t_call		*create_call(t_token *token, unsigned position, unsigned size);
 void		add_call(t_list **calls, t_call *call);
 
-void		write_int(t_program *program, uint32_t size, int32_t value);
+void		write_int(t_program *program, uint8_t size, int32_t value);
 #endif
