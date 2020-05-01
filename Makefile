@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/04/29 22:21:56 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/05/01 19:55:51 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ ASM_HEADERS_LIST = \
 	asm_comp.h \
 	asm_parse.h \
 	asm_token.h \
+	asm_output.h \
 	op.h \
 	test.h
 ASM_HEADERS = $(addprefix $(HEADERS_DIR)/, $(ASM_HEADERS_LIST))
@@ -54,6 +55,7 @@ ASM_SOURCES_INNER_DIR = $(addprefix $(ASM_SOURCES_MAIN_DIR)/, \
 	parser \
 	token \
 	comp \
+	output \
 	)
 ASM_SOURCES = $(addprefix $(ASM_SOURCES_MAIN_DIR)/, \
 	asm.c \
@@ -77,6 +79,7 @@ ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/token/, \
 ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/comp/, \
 	call.c \
 	comp.c \
+	fill_calls.c \
 	helpers.c \
 	label.c \
 	op.c \
@@ -84,6 +87,9 @@ ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/comp/, \
 	program_args.c \
 	program_info.c \
 	program_instrct.c \
+	)
+ASM_SOURCES += $(addprefix $(ASM_SOURCES_MAIN_DIR)/output/, \
+	write_bytecode.c \
 	)
 
 #   temps
@@ -114,7 +120,7 @@ all: $(ASM_NAME)
 
 $(ASM_NAME): $(LIB) $(TEMP_DIR) $(ASM_TEMP_FILES)
 	@ printf "$(CLEARL)\r"
-	@ $(CC) $(FLAGS) $(LIB_CONNECT) $(INCLUDES) $(ASM_TEMP_FILES) -o $(ASM_NAME)
+	@ $(CC) $(FLAGS) $(INCLUDES) $(ASM_TEMP_FILES) -o $(ASM_NAME) $(LIB_CONNECT)
 	@ printf "$(F_DIM)$(F_BOLD)$(GRAY)%-10s$(RESET) $(F_BOLD)$(ASM_NAME)$(RESET) $(GREEN)were created!$(RESET)\n" "(corewar)"
 
 $(LIB):
