@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 13:55:47 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/23 12:21:09 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/01 22:50:45 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,13 @@ void	fill_token(t_token *token, char *value, t_type type, unsigned row, 					uns
 	token->type = type;
 	token->row = row;
 	token->col = col;
+}
+
+void	del_token(void *token, size_t size)
+{
+	if (!token)
+		return ;
+	ft_strdel(&((t_token*)token)->value);
+	free(token);
+	size = 0;
 }
