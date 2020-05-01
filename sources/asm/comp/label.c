@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 20:50:26 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/29 23:45:20 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/01 19:46:20 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_label	*create_label(char *name, unsigned position)
 		exit(1);
 	if (!(label->name = ft_strdup(name)))
 		exit(1);
-	label->init_position = position;
+	label->position = position;
 	label->calls = NULL;
 	return (label);
 }
@@ -45,4 +45,14 @@ t_label	*find_label(t_list **labels, char *name)
 		}
 	}
 	return (NULL);
+}
+
+void	 del_label(void *label,size_t size)
+{
+	if (!label)
+		return ;
+	ft_strdel(&((t_label*)label)->name);
+	ft_lstdel(&((t_label*)label)->calls, &del_call);
+	size = 0;
+	free(label);
 }
