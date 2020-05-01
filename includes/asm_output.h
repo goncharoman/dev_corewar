@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   asm_output.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/16 21:45:32 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/01 15:54:38 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/01 15:08:05 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/05/01 15:45:41 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#ifndef ASM_OUTPUT_H
+# define ASM_OUTPUT_H
+# include <asm.h>
 
-int		main(int argc, char **argv)
-{
-	errno = 0;
-	if (argc == 2 && is_filename(argv[1], ASM_FILENAME_SUFFIX))
-		translate(argv[1]);
-	else
-		print_help();
-	return (0);
-}
+void	write_bytecode_file(const char *filename, t_program *program);
+
+#endif
