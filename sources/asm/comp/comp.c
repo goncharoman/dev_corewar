@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 14:30:59 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/23 22:29:17 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/01 15:04:51 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ void	comp(t_list **tokens, t_program **program)
 	bgn_token = *tokens;
 	get_program_info(&bgn_token, *program);
 	get_program_code(&bgn_token, *program);
+	fill_calls(*program);
 }
