@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 16:47:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/23 21:38:58 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/01 19:48:15 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_program	*program_init()
 	program->code = NULL;
 	program->position = 0;
 	program->size = 0;
+	program->labels = NULL;
 	return (program);
 }
 
@@ -31,4 +32,16 @@ void	increase_code_size(t_program *program)
 	program->size += CHAMP_MAX_SIZE;
 	if (!(program->code = realloc(program->code, (size_t)program->size)))
 		exit(1);
+}
+
+void	del_program(t_program **program)
+{
+	if (program && *program)
+	{
+		ft_strdel(&(*program)->name);
+		ft_strdel(&(*program)->comment);
+		ft_memdel((void**)&(*program)->code);
+		ft_lstdel(&(*program)->labels, &del_label);
+		free(*program);
+	}
 }
