@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 12:37:54 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/29 22:53:50 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/01 01:27:06 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,14 @@ typedef	struct	s_call
 	unsigned	row;
 	unsigned	col;
 	int32_t		position;
+	int32_t		instrct_position;
 	uint32_t	size;
 }				t_call;
 
 typedef struct	s_label
 {
 	char		*name;
-	int32_t		init_position;
+	int32_t		position;;
 	t_list		*calls;
 }				t_label;
 

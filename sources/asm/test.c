@@ -42,3 +42,39 @@ void	print_tokens(t_list **tokens)
 		}
 	}
 }
+
+
+void	print_code(t_program *program)
+{
+	int fd;
+
+	if ((fd = open("code_out", O_RDWR)))
+		write(fd, program->code, program->position);
+	close(fd);
+}
+
+static void	print_call(t_list *begin_call)
+{
+	t_call	*call;
+
+	while (begin_call)
+	{
+		call = begin_call->content;
+		printf("\t[%u:%u] %d %d\t%u\n", call->row, call->col, call->position, call->instrct_position, call->size);
+		begin_call = begin_call->next;
+	}
+}
+
+void 	print_labels(t_list *begin_label)
+{
+	t_label *label;
+
+	while (begin_label)
+	{
+		label = begin_label->content;
+		printf("( %s ) [%d]\n", label->name, label->position);
+		print_call(label->calls);
+		begin_label = begin_label->next;
+	}
+
+}

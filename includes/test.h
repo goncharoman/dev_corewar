@@ -1,5 +1,8 @@
 #ifndef TEST
 # define TEST
-#endif
 
 void	print_tokens(t_list **tokens);
+void	print_code(t_program *program);
+void 	print_labels(t_list *begin_label);
+
+#endif
