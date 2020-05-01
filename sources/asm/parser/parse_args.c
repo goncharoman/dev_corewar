@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 18:41:05 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/23 12:20:39 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/01 21:49:46 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void		parse_str(t_list **tokens, t_parseln *parseln, t_token *token)
 	int		start;
 
 	start = parseln->col;
+	err = 1;
 	/* NOTE: здесь используем строку без обрамляющих ковычек */
 	while (!(endchr = ft_strchr(parseln->line + parseln->col + 1, '\"')) &&
 		(err = get_next_line(parseln->fd, &tmp)) > 0)
