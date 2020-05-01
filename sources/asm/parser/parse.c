@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 17:43:52 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/23 12:20:44 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/01 22:35:04 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void					parse(t_list **tokens, int fd)
 		}
 		if (parseln.size > 0 && parseln.size == parseln.col)
 			add_endtoken(tokens, ENDLN, parseln.row, parseln.col + 1);
+		ft_strdel(&parseln.line);
 	}
 	add_endtoken(tokens, END, parseln.row + 1, 0);
-	print_tokens(tokens);
 	if (err == -1)
 		terminate("error read from file");
 }
