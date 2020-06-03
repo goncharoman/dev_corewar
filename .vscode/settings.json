@@ -1,9 +1,13 @@
 {
 	"C_Cpp.default.includePath": [
 		"${workspaceFolder}/includes/**",
+		"${workspaceFolder}/includes/asm/**",
+		"${workspaceFolder}/includes/corewar/**",
+		"${workspaceFolder}/includes/common/**",
 		"${workspaceFolder}/lib/includes/**"
 	],
 	"files.associations": {
 		"**/*.h": "c",
+		"__locale": "c"
 	}
 }
