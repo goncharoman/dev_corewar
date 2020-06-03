@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_help.c                                       :+:      :+:    :+:   */
+/*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 12:58:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/15 14:26:46 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/04 20:43:09 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/05/06 00:09:17 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#ifndef GENERAL_H
+# define GENERAL_H
+# include <libft.h>
+# include <errno.h>
+# include <stdio.h>
 
-int print_help()
-{
-	/* TODO: написать help */
-	printf("this is help\n");
-	return (0);
-}
+# define ASM_FILENAME_SUFFIX		".s"
+# define BYTECODE_FILENAME_SUFFIX	".cor"
+
+void	term(const char *message);
+t_bool	is_filename(const char *filename, const char *suffix);
+
+#endif

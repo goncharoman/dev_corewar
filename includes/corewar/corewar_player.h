@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_help.c                                       :+:      :+:    :+:   */
+/*   corewar_player.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 12:58:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/15 14:26:46 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/05 23:47:02 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/05/19 03:01:13 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#ifndef COREWAR_PLAYER_H
+# define COREWAR_PLAYER_H
+# include <corewar.h>
 
-int print_help()
-{
-	/* TODO: написать help */
-	printf("this is help\n");
-	return (0);
-}
+t_player	*create_player();
+t_player	*load_player(const char *filename);
+t_player	*get_player(t_list	*players, uint32_t id);
+t_player	*next_player(t_list **lst, uint32_t id);
+void		remove_player(t_player **player);
+
+void		read_player(int fd, t_player *player);
+void		add_player(t_list **players, t_player *player);
+#endif

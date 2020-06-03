@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_help.c                                       :+:      :+:    :+:   */
+/*   term.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 12:58:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/15 14:26:46 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/04 18:20:35 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/05/15 18:37:35 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <common.h>
 
-int print_help()
+void	term(const char *message )
 {
-	/* TODO: написать help */
-	printf("this is help\n");
-	return (0);
+	if (errno == 0)
+		ft_fprintf(2, "%s\n", message);
+	else
+		perror(message);
+	exit(1);
 }

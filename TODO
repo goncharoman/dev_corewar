@@ -1,20 +1,10 @@
 corewar:
-	dev:
-	asambler:
-		process:
-			✔ базовая структура для преобразования в байткод @done(20-04-22 21:12)
-			✔ обработчик `.name` и `.comment` @started(20-04-22 14:23) @done(20-04-22 17:08) @lasted(2h45m12s)
-			✔ обработчик кода @today @done(20-05-01 22:56)
-		✔ label (метки) @done(20-05-01 22:56)
-		✔ написать высвобождение памяти @done(20-05-01 22:56)
-		☐ написать обработчики ошибок
-		✔ дописать `parse_str` @today @1h40m @started(20-04-21 10:56) @done(20-04-21 11:39) @lasted(43m10s)
-		✔ добавление `ENDLN` и `END` в конце строки и кода (соответственно) @started(20-04-21 12:22) @done(20-04-21 13:03) @lasted(41m44s)
-		✔ обработка одной строки коммента @started(20-04-21 15:01) @done(20-04-21 18:47) @lasted(3h46m19s)
+	asm:
+		☐ переименовать op_tab в g_optab
 
-
-		vm:
-			☐ изучить wiki https://github.com/VBrazhnik/Corewar/wiki/%D0%92%D0%B8%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BC%D0%B0%D1%88%D0%B8%D0%BD%D0%B0
+	corewar:
+		☐ переименовать op_tab в g_optab
+		☐ reg[REGNUM] -> cursor
 
 	test:
 		☐ refactoring

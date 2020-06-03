@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_help.c                                       :+:      :+:    :+:   */
+/*   op_aff.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 12:58:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/15 14:26:46 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/11 02:10:23 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/05/16 04:54:10 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <corewar_op.h>
 
-int print_help()
+uint32_t	handler_aff(t_vm *vm, t_cursor *cursor)
 {
-	/* TODO: написать help */
-	printf("this is help\n");
-	return (0);
+	uint32_t	offset;
+	int32_t		value;
+
+	offset = 1 + cursor->oper->args_typescode;
+	value = get_avalue(vm->arena, cursor, &offset, 0);
+	if (vm->aff)
+		ft_printf("Aff: %c\n", (char)value);
+	return (offset);
 }

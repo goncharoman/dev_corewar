@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 17:16:43 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/23 12:21:00 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/02 21:07:42 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ char	*get_value(t_parseln *parseln, unsigned start)
 	char	*value;
 
 	if (!(value = ft_strsub(parseln->line, start, parseln->col - start)))
-		terminate("alocation error: get_token_value");
+		term(STR_MEMALLOC_ERR_MSG);
 	return (value);
 }

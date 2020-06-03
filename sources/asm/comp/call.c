@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 20:49:56 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/01 19:32:03 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/02 21:31:05 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_call	*create_call(t_token *token, int32_t position,
 	t_call	*call;
 
 	if (!(call = (t_call*)ft_memalloc(sizeof(t_call))))
-		exit(1);
+		term(CALL_MEMALLOC_ERR_MSG);
 	call->row = token->row;
 	call->col = token->col - (token->type == DIRL ? 1 : 2);
 	call->position = position;
@@ -29,7 +29,11 @@ t_call	*create_call(t_token *token, int32_t position,
 
 void	add_call(t_list **calls, t_call *call)
 {
-	ft_lstappend(calls, ft_lst(call, sizeof(t_call)));
+	t_list	*tmp;
+
+	if (!(tmp = ft_lst(call, sizeof(t_call))))
+		term(LST_MEMALLOC_ERR_MSG);
+	ft_lstappend(calls, tmp);
 }
 
 void	del_call(void *call, size_t size)

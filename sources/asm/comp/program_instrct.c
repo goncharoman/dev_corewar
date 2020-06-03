@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 17:09:49 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/01 22:04:26 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/02 22:23:30 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ static uint8_t	proc_arg(t_op *op, t_token *token, t_program *program, int arg,
 	const uint8_t	types[12] = {0,0,0,0,1,2,2,3,3,0,0,0};
 
 	if (!(op->args_types[arg] & types[token->type]))
-		/* TODO: написать отдельный обработчик ошибок */
-		exit(1);
+		invalid_arg(token);
 	if (token->type == INDL || token->type == DIRL)
 		proc_call(op, token, program, instrct_position);
 	else if (token->type == DIR || token->type == IND)
@@ -61,13 +60,13 @@ static void		proc_oper(t_op *op, t_list **head, t_program *program)
 		if (token->type >= REG && token->type <= INDL)
 			typescode |= proc_arg(op, token, program, arg++, tc_position - 1);
 		else
-			exit(1);
+			token_error(token);
 		if ((token = next_token(head))->type == SEP && arg < op->args_n)
 			continue;
 		else if (token->type == ENDLN && arg == op->args_n)
 			break;
 		else
-			exit(1);
+			token_error(token);
 	}
 	if (op->args_typescode && typescode)
 		program->code[tc_position] = typescode;
@@ -84,7 +83,7 @@ static void 	proc_instruction(t_token *token, t_list **head,
 		proc_oper(op, head, program);
 	}
 	else
-		exit(1);
+		token_error(token);
 }
 
 void			get_program_code(t_list **head_lst, t_program *program)
@@ -102,6 +101,6 @@ void			get_program_code(t_list **head_lst, t_program *program)
 		else if (token->type == ENDLN)
 			continue;
 		else
-			exit(1);
+			token_error(token);
 	}
 }

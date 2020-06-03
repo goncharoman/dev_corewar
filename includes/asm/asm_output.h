@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_help.c                                       :+:      :+:    :+:   */
+/*   asm_output.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 12:58:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/15 14:26:46 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/01 15:08:05 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/05/02 23:38:07 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#ifndef ASM_OUTPUT_H
+# define ASM_OUTPUT_H
+# include <asm.h>
 
-int print_help()
-{
-	/* TODO: написать help */
-	printf("this is help\n");
-	return (0);
-}
+void	write_bytecode_file(const char *filename, t_program *program);
+void	message_success(char *filename);
+#endif

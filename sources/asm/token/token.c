@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 13:55:47 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/01 22:50:45 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/02 21:05:27 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_token	*create_token(char *value, t_type type, unsigned row, unsigned col)
 	t_token	*token;
 
 	if (!(token = (t_token*)ft_memalloc(sizeof(t_token))))
-		terminate("token error: memory alocation\n");
+		term(TOKEN_MEMALLOC_ERR_MSG);
 	fill_token(token, value, type, row, col);
 	return (token);
 }

@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 17:43:52 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/01 22:35:04 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/15 16:07:14 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void			parse_chunk(t_list **tokens, t_parseln *parseln)
 	t_token	*token;
 
 	type = get_type(parseln);
-	token = create_token(NULL, type, parseln->row, parseln->col);
+	token = create_token(NULL, type, parseln->row,
+		parseln->col + (type == IND));
 	if (type == SEP)
 		add_token(tokens, token);
 	else if (type == CMD || type == DIRL || type == INDL)
@@ -48,7 +49,7 @@ static void			parse_chunk(t_list **tokens, t_parseln *parseln)
 		parse_num(tokens, parseln, token);
 }
 
-void					parse(t_list **tokens, int fd)
+void				parse(t_list **tokens, int fd)
 {
 	int			err;
 	t_parseln	parseln;
@@ -72,5 +73,5 @@ void					parse(t_list **tokens, int fd)
 	}
 	add_endtoken(tokens, END, parseln.row + 1, 0);
 	if (err == -1)
-		terminate("error read from file");
+		term(READ_FILE_ERR_MSG);
 }

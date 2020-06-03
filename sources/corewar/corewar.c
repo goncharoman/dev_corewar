@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.c                                          :+:      :+:    :+:   */
+/*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 13:23:57 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/01 15:15:02 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/04 17:31:37 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/05/19 04:17:02 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <corewar.h>
 
-void	terminate(char *message)
+int		main(int argc, char **argv)
 {
-	if (errno == 0)
-		ft_putendl_fd(message, 2);
+	t_vm	*vm;
+
+	errno = 0;
+	if (argc >= 2)
+	{
+		set_vm((vm = create_vm()), argv + 1);
+		print_representation((t_player**)vm->players);
+		run(vm);
+		print_winner(vm);
+		remove_vm(vm);
+	}
 	else
-		perror(message);
-	exit(1);
+		print_help();
+	return (0);
 }

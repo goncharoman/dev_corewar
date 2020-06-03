@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 12:56:35 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/01 22:46:25 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/05/02 22:43:28 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	translate(const char *filename)
 	t_program	*program;
 
 	if ((fd = open(filename, O_RDONLY)) == -1)
-		terminate("open file error");
+		term(OPEN_INFILE_ERR_MSG);
 	tokens_list = NULL;
 	program = NULL;
 	parse(&tokens_list, fd);
