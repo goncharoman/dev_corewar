@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 13:55:47 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/11 22:53:57 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/11 23:20:56 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,11 @@ t_token	*create_token(char *value, t_type type, unsigned row, unsigned col)
 
 	if (!(token = (t_token*)ft_memalloc(sizeof(t_token))))
 		term(TOKEN_MEMALLOC_ERR_MSG);
-	fill_token(token, value, type, row, col);
-	return (token);
-}
-
-void	fill_token(t_token *token, char *value, t_type type, unsigned row,					unsigned col)
-{
 	token->value = value;
 	token->type = type;
 	token->row = row;
 	token->col = col;
+	return (token);
 }
 
 void	del_token(void *token, size_t size)

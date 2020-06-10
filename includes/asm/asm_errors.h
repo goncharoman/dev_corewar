@@ -6,16 +6,18 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 20:41:28 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/02 22:49:21 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/10 01:27:08 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_ERRORS_H
 # define ASM_ERRORS_H
+# include <asm.h>
 
-#include <asm.h>
+/*
+** ERROR MESSAGES
+*/
 
-/* ERROR MESSAGES */
 # define OPEN_INFILE_ERR_MSG		"ERROR: Can\'t open input file"
 # define OPEN_OUTFILE_ERR_MSG		"ERROR: Can\'t open output file"
 # define READ_FILE_ERR_MSG			"ERROR: Read error"

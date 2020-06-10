@@ -6,30 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 17:43:52 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/15 16:07:14 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/10 05:00:21 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm_parse.h>
-
-static t_type		get_type(t_parseln *parseln)
-{
-	if (*(parseln->line + parseln->col) == SEPARATOR_CHAR && ++(parseln->col))
-		return (SEP);
-	if (*(parseln->line + parseln->col) == CMD_CHAR && ++(parseln->col))
-		return (CMD);
-	if (*(parseln->line + parseln->col) == DIRECT_CHAR && ++(parseln->col))
-	{
-		if (*(parseln->line + parseln->col) == LABEL_CHAR && ++(parseln->col))
-			return (DIRL);
-		return (DIR);
-	}
-	if (*(parseln->line + parseln->col) == '\"' && ++(parseln->col))
-		return (STR);
-	if (*(parseln->line + parseln->col) == LABEL_CHAR && ++(parseln->col))
-		return (INDL);
-	return (IND);
-}
 
 static void			parse_chunk(t_list **tokens, t_parseln *parseln)
 {
@@ -38,15 +19,15 @@ static void			parse_chunk(t_list **tokens, t_parseln *parseln)
 
 	type = get_type(parseln);
 	token = create_token(NULL, type, parseln->row,
-		parseln->col + (type == IND));
-	if (type == SEP)
-		add_token(tokens, token);
-	else if (type == CMD || type == DIRL || type == INDL)
-		parse_deep(tokens, parseln, token);
+		parseln->col + (parseln->col == 0));
+	if (type == CMD || type == DIRL || type == INDL || type == LBL ||
+			type == OPR || type == REG)
+		parse_name(parseln, token);
 	else if (type == STR)
-		parse_str(tokens, parseln, token);
-	else
-		parse_num(tokens, parseln, token);
+		parse_str(parseln, token);
+	else if (type == DIR || type == IND)
+		parse_num(parseln, token);
+	add_token(tokens, token);
 }
 
 void				parse(t_list **tokens, int fd)

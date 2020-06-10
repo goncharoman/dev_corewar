@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 21:02:42 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/02 21:05:09 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/10 05:35:59 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ void	add_endtoken(t_list **tokens, t_type type, unsigned row, unsigned col)
 		{
 			if (!(tail->next = ft_lst(create_token(NULL, type, row, col),
 				sizeof(t_token))))
-			if (!(tail->next))
-				term(LST_MEMALLOC_ERR_MSG);
+				if (!(tail->next))
+					term(LST_MEMALLOC_ERR_MSG);
 		}
 	}
 	else
+	{
 		if (type == END)
 			add_token(tokens, create_token(NULL, END, 0, 0));
+	}
 }

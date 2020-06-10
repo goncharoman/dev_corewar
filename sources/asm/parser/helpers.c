@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 18:19:05 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/11 22:52:09 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/11 23:20:50 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,16 @@ t_bool	is_spec_smb(int c)
 			is_whitespace(c));
 }
 
-t_bool	is_reg(char *value)
+void	skip_whitespaces(t_parseln *parseln)
 {
-	int	i;
+	while (is_whitespace(parseln->line[parseln->col]))
+		parseln->col++;
+}
 
-	if (*value == REG_CHAR && ft_strlen(value) > 1 && ft_strlen(value) <= 3)
-	{
-		i = 0;
-		value++;
-		while (ft_isdigit(value[i]))
-			i++;
-		return (!value[i] && ft_atoi(value) > 0 ? true : false);
-	}
-	return (false);
+void	skip_comment(t_parseln *parseln)
+{
+	if (parseln->line[parseln->col] == COMMENT_CHAR ||
+		parseln->line[parseln->col] == ALT_COMMENT_CHAR)
+		while (parseln->line[parseln->col])
+			parseln->col++;
 }
