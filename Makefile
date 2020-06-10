@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/05/18 20:36:06 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/06/10 04:52:48 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,9 +65,9 @@ ASM_SOURCES = $(addprefix $(ASM_NAME)/, \
  	)
 ASM_SOURCES += $(addprefix $(ASM_NAME)/parser/, \
 	helpers.c \
-	skips.c \
 	parse.c \
-	parse_args.c \
+	get_type.c \
+	parse_value.c \
 	)
 ASM_SOURCES += $(addprefix $(ASM_NAME)/token/, \
 	add.c \

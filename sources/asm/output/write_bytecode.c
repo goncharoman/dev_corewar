@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 15:07:37 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/15 18:15:07 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/10 05:36:27 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void		write_bytecode(int fd, t_program *program)
 void			write_bytecode_file(const char *filename, t_program *program)
 {
 	char	*output_filename;
-	int 	fd;
+	int		fd;
 
 	output_filename = get_output_filename(filename);
 	if ((fd = open(output_filename, O_CREAT | O_TRUNC | O_WRONLY, 0664)) == -1)

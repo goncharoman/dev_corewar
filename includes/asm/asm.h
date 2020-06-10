@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 21:41:30 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/04 21:25:52 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/10 02:03:19 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@
 # include <asm_output.h>
 # include <asm_errors.h>
 
-void		translate(const char *filename);
-int			print_help();
+void			translate(const char *filename);
+int				print_help();
 #endif
-
-
-

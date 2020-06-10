@@ -5,6 +5,7 @@ corewar:
 	corewar:
 		☐ переименовать op_tab в g_optab
 		☐ reg[REGNUM] -> cursor
+		☐ переименовать t_cursor.jump в carry
 
 	test:
 		☐ refactoring
