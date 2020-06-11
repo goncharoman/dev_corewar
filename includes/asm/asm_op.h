@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 12:49:03 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/10 01:28:47 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/11 23:05:03 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # define OP_NUMS	16
 
-const t_op		op_tab[OP_NUMS] = {
+const t_op		g_tab[OP_NUMS] = {
 	{
 		.name = "live",
 		.code = 0x01,
@@ -110,7 +110,7 @@ const t_op		op_tab[OP_NUMS] = {
 		.code = 0x0C,
 		.args_n = 1,
 		.args_typescode = false,
-		.args_types = {T_DIR, 0 ,0},
+		.args_types = {T_DIR, 0, 0},
 		.tdir_size = 2,
 	},
 	{
@@ -144,6 +144,6 @@ const t_op		op_tab[OP_NUMS] = {
 		.args_typescode = true,
 		.args_types = {T_REG, 0, 0},
 		.tdir_size = 4,
-	},
+	}
 };
 #endif
