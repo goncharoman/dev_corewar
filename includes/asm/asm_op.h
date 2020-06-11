@@ -6,7 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 12:49:03 by ujyzene           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/06/11 22:50:50 by ujyzene          ###   ########.fr       */
+=======
+/*   Updated: 2020/06/11 23:05:03 by ujyzene          ###   ########.fr       */
+>>>>>>> ca0a6c4... norm fix
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +114,7 @@ const t_op		g_tab[OP_NUMS] = {
 		.code = 0x0C,
 		.args_n = 1,
 		.args_typescode = false,
-		.args_types = {T_DIR, 0 ,0},
+		.args_types = {T_DIR, 0, 0},
 		.tdir_size = 2,
 	},
 	{
@@ -144,6 +148,6 @@ const t_op		g_tab[OP_NUMS] = {
 		.args_typescode = true,
 		.args_types = {T_REG, 0, 0},
 		.tdir_size = 4,
-	},
+	}
 };
 #endif
