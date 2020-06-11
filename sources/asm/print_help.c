@@ -6,15 +6,14 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 12:58:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/15 14:26:46 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/11 22:53:15 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int print_help()
+int	print_help(void)
 {
-	/* TODO: написать help */
-	printf("this is help\n");
+	ft_printf("this is help\n");
 	return (0);
 }

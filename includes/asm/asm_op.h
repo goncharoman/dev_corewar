@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 12:49:03 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/23 22:25:30 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/11 22:50:50 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # define OP_NUMS	16
 
-const t_op		op_tab[OP_NUMS] = {
+const t_op		g_tab[OP_NUMS] = {
 	{
 		.name = "live",
 		.code = 0x01,

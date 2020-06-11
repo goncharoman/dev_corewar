@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 18:19:05 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/04/23 12:20:34 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/11 22:52:09 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_bool	is_spec_smb(int c)
 			is_whitespace(c));
 }
 
-t_bool is_reg(char *value)
+t_bool	is_reg(char *value)
 {
 	int	i;
 

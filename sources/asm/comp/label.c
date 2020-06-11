@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 20:50:26 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/02 22:04:21 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/10 06:22:21 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_label	*find_label(t_list **labels, char *name)
 	return (NULL);
 }
 
-void	 del_label(void *label,size_t size)
+void	del_label(void *label, size_t size)
 {
 	if (!label)
 		return ;

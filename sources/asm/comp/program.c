@@ -6,13 +6,13 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 16:47:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/15 18:29:36 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/10 06:21:42 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm_comp.h>
 
-t_program	*program_init()
+t_program	*program_init(void)
 {
 	t_program	*program;
 
@@ -27,7 +27,7 @@ t_program	*program_init()
 	return (program);
 }
 
-void	increase_code_size(t_program *program)
+void		increase_code_size(t_program *program)
 {
 	if (program->size == 0)
 	{
@@ -43,7 +43,7 @@ void	increase_code_size(t_program *program)
 	}
 }
 
-void	del_program(t_program **program)
+void		del_program(t_program **program)
 {
 	if (program && *program)
 	{
