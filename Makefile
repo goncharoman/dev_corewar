@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/06/10 04:52:48 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/06/14 20:51:53 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -255,7 +255,7 @@ clean:
 
 fclean: clean
 	@ $(MAKE) -sC $(LIB_DIR) fclean
-	@ rm -rf $(ASM_NAME)
+	@ rm -rf $(ASM_NAME) $(COREWAR_NAME)
 	@ printf "$(F_DIM)$(F_BOLD)$(GRAY)%-10s$(RESET) $(F_BOLD)$(ASM_NAME)$(RESET) $(YELLOW)were deleted$(RESET)\n" "(corewar)"
 
 re: fclean all
