@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 17:09:49 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/02 22:23:30 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/12 22:16:47 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,61 +26,69 @@ static void		proc_label(t_token *token, t_program *program)
 	}
 }
 
-static uint8_t	proc_arg(t_op *op, t_token *token, t_program *program, int arg,
-					int32_t instrct_position)
+static uint8_t	proc_arg(t_op *op, t_token *token, t_program *program,
+				int32_t begin_instruct)
 {
-	const uint8_t	types[12] = {0,0,0,0,1,2,2,3,3,0,0,0};
-
-	if (!(op->args_types[arg] & types[token->type]))
-		invalid_arg(token);
-	if (token->type == INDL || token->type == DIRL)
-		proc_call(op, token, program, instrct_position);
-	else if (token->type == DIR || token->type == IND)
-		proc_num(op, token, program);
-	else
+	if (token->type == DIR || token->type == IND)
+		proc_numeric(op, token, program);
+	else if (token->type == REG)
 		proc_reg(token, program);
-	return (types[token->type] << (2 * (3 - arg)));
-
+	else
+		proc_call(op, token, program, begin_instruct);
+	if (token->type == DIR || token->type == DIRL)
+		return (DIR_CODE);
+	else if (token->type == IND || token->type == INDL)
+		return (IND_CODE);
+	else
+		return (REG_CODE);
 }
 
-static void		proc_oper(t_op *op, t_list **head, t_program *program)
+static uint8_t	proc_args(t_op *op, t_list **head, t_program *program,
+				int32_t begin_instruct)
 {
-	t_token		*token;
-	int			arg;
-	uint8_t		typescode;
-	int32_t		tc_position;
+	uint8_t	typescode;
+	int		i;
+	t_token	*token;
 
-	arg = 0;
+	i = 0;
 	typescode = 0;
-	tc_position = program->position;
-	if (op->args_typescode)
-		program->position++;
 	while ((token = next_token(head)))
 	{
-		if (token->type >= REG && token->type <= INDL)
-			typescode |= proc_arg(op, token, program, arg++, tc_position - 1);
+		if (is_arg(token->type))
+		{
+			if (!(op->args_types[i] & ttype_to_targ(token->type)))
+				invalid_arg(token);
+			typescode |=
+				proc_arg(op, token, program, begin_instruct) << (2 * (3 - i++));
+		}
 		else
 			token_error(token);
-		if ((token = next_token(head))->type == SEP && arg < op->args_n)
-			continue;
-		else if (token->type == ENDLN && arg == op->args_n)
-			break;
+		if ((token = next_token(head))->type == SEP && i < op->args_n)
+			continue ;
+		else if (token->type == ENDLN && i == op->args_n)
+			break ;
 		else
 			token_error(token);
 	}
-	if (op->args_typescode && typescode)
-		program->code[tc_position] = typescode;
+	return (typescode);
 }
 
-static void 	proc_instruction(t_token *token, t_list **head,
+static void		proc_instruction(t_token *token, t_list **head,
 					t_program *program)
 {
-	t_op		*op;
+	t_op	*op;
+	int32_t	typcodes_addr;
+	uint8_t	typescode;
 
 	if ((op = get_oper(token->value)))
 	{
 		program->code[program->position++] = op->code;
-		proc_oper(op, head, program);
+		if (op->args_typescode)
+			typcodes_addr = program->position++;
+		typescode = proc_args(op, head, program,
+				program->position - 1 - op->args_typescode);
+		if (op->args_typescode)
+			program->code[typcodes_addr] = typescode;
 	}
 	else
 		token_error(token);

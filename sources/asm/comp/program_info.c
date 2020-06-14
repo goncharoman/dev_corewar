@@ -6,13 +6,13 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 14:40:15 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/02 22:00:51 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/10 06:22:52 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm_comp.h>
 
-static void get_name(t_token *token, t_program *program)
+static void	get_name(t_token *token, t_program *program)
 {
 	if (token->type != STR)
 		token_error(token);
@@ -20,10 +20,9 @@ static void get_name(t_token *token, t_program *program)
 		term(STR_MEMALLOC_ERR_MSG);
 	if (ft_strlen(token->value) > PROG_NAME_LENGTH)
 		program_error(PROGRAM_NAME_FAIL_MSG);
-
 }
 
-static void get_comment(t_token *token, t_program *program)
+static void	get_comment(t_token *token, t_program *program)
 {
 	if (token->type != STR)
 		token_error(token);
@@ -33,7 +32,7 @@ static void get_comment(t_token *token, t_program *program)
 		program_error(PROGRAN_COMMENT_FAIL_MSG);
 }
 
-void	get_program_info(t_list **head_lst, t_program *program)
+void		get_program_info(t_list **head_lst, t_program *program)
 {
 	t_token	*token;
 

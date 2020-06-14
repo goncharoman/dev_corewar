@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:22:43 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/02 22:39:26 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/10 06:19:53 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,14 @@ static void	fillwith_this(t_program *program, t_label *label)
 		call = tmp_lst->content;
 		write_int(program->code,
 					call->position,
-		 			call->size, call->size == 2 ? \
+					call->size, call->size == 2 ? \
 						(int16_t)(label->position - call->instrct_position) :
-							label->position - call->instrct_position
-					);
+							label->position - call->instrct_position);
 		tmp_lst = tmp_lst->next;
 	}
 }
 
-void	fill_calls(t_program *program)
+void		fill_calls(t_program *program)
 {
 	t_list	*tmp;
 
