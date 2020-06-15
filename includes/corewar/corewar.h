@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 17:32:02 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/11 00:58:13 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 18:50:41 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@
 # define IND_MEM_SIZE	2
 # define DIR_MEM_SIZE	4
 
-void	print_help();
+void	print_help(void);
 #endif

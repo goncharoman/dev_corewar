@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 01:16:58 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/19 04:15:37 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:08:58 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int32_t	int_from_bytecode(uint8_t *value, size_t size)
 	return (!sign ? result : ~result);
 }
 
-static	void	read_data(int fd, void **dest, size_t size, t_bool is_string)
+static void		read_data(int fd, void **dest, size_t size, t_bool is_string)
 {
 	int		offset;
 	uint8_t	*buff;
@@ -44,7 +44,7 @@ static	void	read_data(int fd, void **dest, size_t size, t_bool is_string)
 		term(INVALID_FILE_ERR_MSG);
 	if (is_string)
 	{
-		if (!(*dest= ft_strdup((char*)buff)))
+		if (!(*dest = ft_strdup((char*)buff)))
 			term(STR_MEMALLOC_ERR_MSG);
 		ft_memdel((void**)&buff);
 	}
@@ -52,7 +52,7 @@ static	void	read_data(int fd, void **dest, size_t size, t_bool is_string)
 		*dest = buff;
 }
 
-static	int32_t	read_number(int fd)
+static int32_t	read_number(int fd)
 {
 	int		offset;
 	uint8_t	*buff;
@@ -69,7 +69,7 @@ static	int32_t	read_number(int fd)
 	return (ret);
 }
 
-void	read_player(int fd, t_player *player)
+void			read_player(int fd, t_player *player)
 {
 	char buff;
 
@@ -77,7 +77,7 @@ void	read_player(int fd, t_player *player)
 		term(INVALID_FILE_ERR_MSG);
 	read_data(fd, (void**)&(player->name), PROG_NAME_LENGTH, true);
 	if (read_number(fd) != 0)
-		term(INVALID_FILE_ERR_MSG);;
+		term(INVALID_FILE_ERR_MSG);
 	if ((player->code_size = read_number(fd)) > CHAMP_MAX_SIZE)
 		term(INVALID_FILE_ERR_MSG);
 	read_data(fd, (void**)&(player->comment), COMMENT_LENGTH, true);

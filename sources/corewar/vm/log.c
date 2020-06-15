@@ -6,13 +6,13 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 00:23:36 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/18 21:07:16 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:03:34 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar_vm.h>
 
-void log_pcmove(t_vm *vm, t_cursor *cursor, int32_t offset)
+void	log_pcmove(t_vm *vm, t_cursor *cursor, int32_t offset)
 {
 	int32_t	i;
 

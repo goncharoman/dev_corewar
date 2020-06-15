@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 00:37:02 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/18 20:04:22 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:04:22 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int32_t		bcode_to_int(uint8_t *mem, int32_t addr, int32_t size)
 	return (sign ? ~result : result);
 }
 
-void	write_int(uint8_t *mem, int32_t addr, uint32_t size, int32_t value)
+void		write_int(uint8_t *mem, int32_t addr, uint32_t size, int32_t value)
 {
 	uint8_t	i;
 

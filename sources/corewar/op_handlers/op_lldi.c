@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 02:07:28 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/18 03:48:04 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:12:22 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ inline static void	log_oper(t_cursor *cursor, int32_t addr[2], int32_t r)
 			cursor->pc + (addr[0] + addr[1]));
 }
 
-uint32_t	handler_lldi(t_vm *vm, t_cursor *cursor)
+uint32_t			handler_lldi(t_vm *vm, t_cursor *cursor)
 {
 	uint32_t	offset;
 	int32_t		addr[2];

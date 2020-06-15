@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 02:04:47 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/17 22:22:22 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:09:48 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ inline static void	log_oper(t_cursor *cursor, int32_t addr)
 		cursor->pc + addr % IDX_MOD);
 }
 
-uint32_t	handler_fork(t_vm *vm, t_cursor *cursor)
+uint32_t			handler_fork(t_vm *vm, t_cursor *cursor)
 {
 	uint32_t	offset;
 	int32_t		addr;

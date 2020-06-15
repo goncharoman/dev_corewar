@@ -6,13 +6,13 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 05:27:42 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/19 05:51:03 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:03:56 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar_vm.h>
 
-static uint8_t	get_type( uint8_t index)
+static uint8_t	get_type(uint8_t index)
 {
 	return (index < 1 && index > 3 ? 0 : index);
 }

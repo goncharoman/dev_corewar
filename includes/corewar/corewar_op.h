@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:03:17 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/11 18:27:19 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 18:58:58 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # define OP_NUMS	16
 
-static t_op		op_tab[OP_NUMS] = {
+static t_op		g_tab[OP_NUMS] = {
 	{
 		.name = "live",
 		.code = 0x01,
@@ -121,7 +121,7 @@ static t_op		op_tab[OP_NUMS] = {
 		.code = 0x0C,
 		.args_n = 1,
 		.args_typescode = false,
-		.args_types = {T_DIR, 0 ,0},
+		.args_types = {T_DIR, 0, 0},
 		.tdir_size = 2,
 		.cycles_to_exec = 800,
 	},
@@ -180,7 +180,7 @@ uint32_t	handler_lldi(t_vm *vm, t_cursor *cursor);
 uint32_t	handler_lfork(t_vm *vm, t_cursor *cursor);
 uint32_t	handler_aff(t_vm *vm, t_cursor *cursor);
 
-static uint32_t (*op_handlers[OP_NUMS])(t_vm*, t_cursor*) = {
+static uint32_t (*g_handlers[OP_NUMS])(t_vm*, t_cursor*) = {
 	&handler_live,
 	&handler_ld,
 	&handler_st,

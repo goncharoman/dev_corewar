@@ -6,13 +6,13 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:12:24 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/19 04:26:57 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:06:23 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar_vm.h>
 
-t_vm		*create_vm()
+t_vm		*create_vm(void)
 {
 	t_vm	*vm;
 

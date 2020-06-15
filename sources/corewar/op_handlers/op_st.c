@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 01:52:28 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/17 21:25:30 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:14:13 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ inline static void	log_oper(int32_t id, int32_t r_id, int32_t addr)
 	ft_printf("P %4d | st r%d %d\n", id + 1, r_id, addr);
 }
 
-uint32_t	handler_st(t_vm *vm, t_cursor *cursor)
+uint32_t			handler_st(t_vm *vm, t_cursor *cursor)
 {
 	uint32_t	offset;
 	int32_t		value;

@@ -6,13 +6,13 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:50:35 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/04 22:16:10 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:02:25 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <corewar.h>
+#include <corewar.h>
 
-void	print_help()
+void	print_help(void)
 {
 	ft_putstr("this is help place\n");
 	exit(0);

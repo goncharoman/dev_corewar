@@ -6,13 +6,13 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 20:28:52 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/16 16:52:10 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:06:54 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar_vm.h>
 
-static void set_cursors(t_vm *vm)
+static void	set_cursors(t_vm *vm)
 {
 	uint32_t	pc;
 	int			i;
@@ -84,7 +84,7 @@ static void	parse_args(t_vm *vm, char **argv, t_list **input_champs)
 	}
 }
 
-void	set_vm(t_vm *vm, char **argv)
+void		set_vm(t_vm *vm, char **argv)
 {
 	t_list	*input_champs;
 

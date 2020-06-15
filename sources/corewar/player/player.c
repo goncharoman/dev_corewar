@@ -6,13 +6,13 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 23:46:33 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/19 03:27:20 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:07:51 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar_player.h>
 
-t_player	*create_player()
+t_player	*create_player(void)
 {
 	t_player	*player;
 
@@ -40,7 +40,7 @@ t_player	*load_player(const char *filename)
 	return (player);
 }
 
-void	add_player(t_list **players, t_player *player)
+void		add_player(t_list **players, t_player *player)
 {
 	t_list	*tmp;
 
@@ -49,7 +49,7 @@ void	add_player(t_list **players, t_player *player)
 	ft_lstappend(players, tmp);
 }
 
-void	remove_player(t_player **player)
+void		remove_player(t_player **player)
 {
 	ft_strdel(&((*player)->name));
 	ft_strdel(&((*player)->comment));

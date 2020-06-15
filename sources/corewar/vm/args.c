@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 05:35:27 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/10 04:53:52 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:03:14 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int32_t	get_byte(uint8_t *mem, uint32_t addr)
 	return (mem[mem_addr(addr)]);
 }
 
-int32_t get_addr(uint8_t *mem, uint32_t addr)
+int32_t	get_addr(uint8_t *mem, uint32_t addr)
 {
 	return (get_value(mem, addr, IND_SIZE));
 }

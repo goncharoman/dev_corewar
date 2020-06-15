@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:03:42 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/19 05:17:12 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 18:59:55 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_player	t_player;
 typedef	struct s_cursor	t_cursor;
 typedef struct s_op		t_op;
 
-struct s_op
+struct			s_op
 {
 	char		*name;
 	uint8_t		code;
@@ -31,7 +31,7 @@ struct s_op
 	uint32_t	cycles_to_exec;
 };
 
-struct s_cursor
+struct			s_cursor
 {
 	uint32_t	id;
 	uint32_t	pc;
@@ -40,11 +40,11 @@ struct s_cursor
 	t_op		*oper;
 	uint8_t		oper_args_types[3];
 	t_player	*parent;
-	t_bool		jump;
+	t_bool		carry;
 	uint32_t	alive_cycle;
 };
 
-struct	s_vm
+struct			s_vm
 {
 	uint8_t		arena[MEM_SIZE];
 	int32_t		players_num;
@@ -61,7 +61,7 @@ struct	s_vm
 	int8_t		log_lavel;
 };
 
-struct	s_player
+struct			s_player
 {
 	uint32_t	id;
 	char		*name;

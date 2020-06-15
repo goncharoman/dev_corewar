@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 22:11:45 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/19 00:45:30 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 19:05:53 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	next_cycle(t_vm *vm)
 	}
 }
 
-void	run(t_vm *vm)
+void		run(t_vm *vm)
 {
 	int32_t	check_cycles;
 	int32_t checks_count;
