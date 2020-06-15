@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 13:55:47 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/14 21:57:59 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 06:12:46 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void	del_token(void *token, size_t size)
 		return ;
 	ft_strdel(&((t_token*)token)->value);
 	free(token);
-	size = 0;
+	if (size != 0)
+		size = 0;
 }

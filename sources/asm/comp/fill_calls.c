@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:22:43 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/10 06:19:53 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 16:45:29 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	fillwith_this(t_program *program, t_label *label)
 	t_list	*tmp_lst;
 
 	if (label->position == -1)
-		label_error(label);
+		label_error(&program, label);
 	tmp_lst = label->calls;
 	while (tmp_lst)
 	{

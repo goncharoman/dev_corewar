@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 12:07:48 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/10 04:51:25 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 14:54:48 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void		skip_comment(t_parseln *parseln);
 t_bool		is_whitespace(int c);
 t_bool		is_spec_smb(int c);
 t_type		get_type(t_parseln *parseln);
-void		parse_name(t_parseln *parseln, t_token *token);
-void		parse_str(t_parseln *parseln, t_token *token);
-void		parse_num(t_parseln *parseln, t_token *token);
+t_bool		parse_name(t_parseln *parseln, t_token *token);
+t_bool		parse_str(t_parseln *parseln, t_token *token);
+t_bool		parse_num(t_parseln *parseln, t_token *token);
 
 #endif

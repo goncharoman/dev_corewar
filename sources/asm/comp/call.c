@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 20:49:56 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/11 22:20:37 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 06:13:15 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	del_call(void *call, size_t size)
 {
 	if (call)
 		free(call);
-	size = 0;
+	if (size != 0)
+		size = 0;
 }

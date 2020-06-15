@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 17:09:49 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/12 22:16:47 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 17:25:02 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ static uint8_t	proc_args(t_op *op, t_list **head, t_program *program,
 		if (is_arg(token->type))
 		{
 			if (!(op->args_types[i] & ttype_to_targ(token->type)))
-				invalid_arg(token);
+				invalid_arg(&program, token, op, i);
 			typescode |=
 				proc_arg(op, token, program, begin_instruct) << (2 * (3 - i++));
 		}
 		else
-			token_error(token);
+			token_error(&program, token);
 		if ((token = next_token(head))->type == SEP && i < op->args_n)
 			continue ;
 		else if (token->type == ENDLN && i == op->args_n)
 			break ;
 		else
-			token_error(token);
+			token_error(&program, token);
 	}
 	return (typescode);
 }
@@ -91,15 +91,18 @@ static void		proc_instruction(t_token *token, t_list **head,
 			program->code[typcodes_addr] = typescode;
 	}
 	else
-		token_error(token);
+		token_error(&program, token);
 }
 
 void			get_program_code(t_list **head_lst, t_program *program)
 {
 	t_token		*token;
+	t_bool		err;
 
+	err = true;
 	while ((token = next_token(head_lst))->type != END)
 	{
+		err = false;
 		if (program->position >= program->size)
 			increase_code_size(program);
 		if (token->type == LBL)
@@ -109,6 +112,8 @@ void			get_program_code(t_list **head_lst, t_program *program)
 		else if (token->type == ENDLN)
 			continue;
 		else
-			token_error(token);
+			token_error(&program, token);
 	}
+	if (err)
+		token_error(&program, token);
 }

@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 04:10:29 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 03:23:08 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 17:44:43 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*get_value(t_parseln *parseln, int start)
 	return (value);
 }
 
-void		parse_str(t_parseln *parseln, t_token *token)
+t_bool		parse_str(t_parseln *parseln, t_token *token)
 {
 	char	*endchr;
 	char	*tmp;
@@ -50,14 +50,15 @@ void		parse_str(t_parseln *parseln, t_token *token)
 	if (err == -1)
 		term(READ_FILE_ERR_MSG);
 	if (err == 0)
-		syntax_error(parseln->row, parseln->col);
+		return (err);
 	if (!(token->value = ft_strsub(parseln->line, start,
 		endchr - (parseln->line + start))))
 		term(STR_MEMALLOC_ERR_MSG);
 	parseln->col += endchr - (parseln->line + start) + 1;
+	return (true);
 }
 
-void		parse_num(t_parseln *parseln, t_token *token)
+t_bool		parse_num(t_parseln *parseln, t_token *token)
 {
 	unsigned start;
 
@@ -68,10 +69,11 @@ void		parse_num(t_parseln *parseln, t_token *token)
 	if (is_spec_smb(*(parseln->line + parseln->col)))
 		token->value = get_value(parseln, start);
 	else
-		syntax_error(parseln->row, parseln->col);
+		return (false);
+	return (true);
 }
 
-void		parse_name(t_parseln *parseln, t_token *token)
+t_bool		parse_name(t_parseln *parseln, t_token *token)
 {
 	unsigned start;
 
@@ -86,5 +88,6 @@ void		parse_name(t_parseln *parseln, t_token *token)
 			parseln->col++;
 	}
 	else
-		syntax_error(token->row, token->col);
+		return (false);
+	return (true);
 }

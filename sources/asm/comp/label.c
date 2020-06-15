@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 20:50:26 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/10 06:22:21 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 06:14:04 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	del_label(void *label, size_t size)
 		return ;
 	ft_strdel(&((t_label*)label)->name);
 	ft_lstdel(&((t_label*)label)->calls, &del_call);
-	size = 0;
+	if (size != 0)
+		size = 0;
 	free(label);
 }

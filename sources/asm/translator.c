@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 12:56:35 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/14 22:02:58 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 16:58:25 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ void	translate(const char *filename)
 	comp(&tokens_list, &program);
 	write_bytecode_file(filename, program);
 	del_program(&program);
-	ft_lstdel(&tokens_list, &del_token);
 }
