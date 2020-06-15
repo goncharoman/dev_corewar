@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 04:10:29 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/14 22:00:11 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 03:23:08 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,5 @@ void		parse_name(t_parseln *parseln, t_token *token)
 			parseln->col++;
 	}
 	else
-		syntax_error(parseln->row, parseln->col);
+		syntax_error(token->row, token->col);
 }

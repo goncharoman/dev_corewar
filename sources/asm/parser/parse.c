@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 17:43:52 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/14 22:00:04 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 03:36:11 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static void			parse_chunk(t_list **tokens, t_parseln *parseln)
 	t_token	*token;
 
 	type = get_type(parseln);
-	token = create_token(NULL, type, parseln->row,
-		parseln->col + (parseln->col == 0));
+	token = create_token(NULL, type, parseln->row, parseln->col + 1);
 	if (type == CMD || type == DIRL || type == INDL || type == LBL ||
 			type == OPR || type == REG)
 		parse_name(parseln, token);
