@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 20:41:28 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 16:46:39 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 02:50:48 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 void	print_position(unsigned row, unsigned col);
 void	term(const char *message);
-void	syntax_error(t_parseln *parseln, t_list **tokens, t_token *token);
+void	lexical_error(t_parseln *parseln, t_list **tokens, t_token *token);
 void	program_error(t_program **program, const char *message);
 void	token_error(t_program **program, t_token *token);
 void	invalid_arg(t_program **program, t_token *token, t_op *op, int arg_n);

@@ -6,17 +6,17 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:13:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 17:40:28 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 02:51:11 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm_errors.h>
 
-void	syntax_error(t_parseln *parseln, t_list **tokens, t_token *token)
+void	lexical_error(t_parseln *parseln, t_list **tokens, t_token *token)
 {
 	int err;
 
-	ft_fprintf(2, "[%u, %u]\tSyntax error\n", token->row, token->col);
+	ft_fprintf(2, "[%u, %u]\tLexical error\n", token->row, token->col);
 	ft_lstdel(tokens, &del_token);
 	del_token(token, sizeof(t_token));
 	ft_strdel(&parseln->line);
