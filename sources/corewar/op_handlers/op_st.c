@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 01:52:28 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 19:14:13 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 05:29:19 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ uint32_t			handler_st(t_vm *vm, t_cursor *cursor)
 	offset = 1 + (int)cursor->oper->args_typescode;
 	arg[0] = get_byte(vm->arena, cursor->pc + offset++);
 	value = cursor->reg[arg[0] - 1];
-	if (cursor->oper_args_types[1] == IND_CODE)
+	if (cursor->oper_args_types[1] == T_IND)
 	{
 		arg[1] = get_addr(vm->arena, cursor->pc + offset);
 		write_int(vm->arena, cursor->pc + (arg[1] % IDX_MOD), DIR_SIZE,

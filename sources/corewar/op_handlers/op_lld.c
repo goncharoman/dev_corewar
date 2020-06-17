@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 02:05:36 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 19:12:54 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 05:25:45 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ uint32_t			handler_lld(t_vm *vm, t_cursor *cursor)
 	int32_t		r;
 
 	offset = 1 + cursor->oper->args_typescode;
-	if (cursor->oper_args_types[0] == DIR_CODE)
+	if (cursor->oper_args_types[0] == T_DIR)
 	{
 		value = get_value(vm->arena, cursor->pc + offset,
 			cursor->oper->tdir_size);
