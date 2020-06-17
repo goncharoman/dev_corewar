@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/06/14 21:57:32 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/06/17 16:30:34 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -205,7 +205,7 @@ LIB_CONNECT = -lft -L$(LIB_DIR)
 
 # COMP
 CC = gcc
-FLAGS = -Wall -Wextra -g
+FLAGS = -Wall -Wextra -Werror
 
 INCLUDES = \
 	-I$(LIB_HEADERS) \
