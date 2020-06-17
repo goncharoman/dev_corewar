@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:12:24 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 19:06:23 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 15:10:26 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_vm		*create_vm(void)
 	vm->cursors = NULL;
 	vm->cursors_count = 0;
 	vm->dump_cycles = -1;
-	vm->show_cycles = -1;
 	vm->aff = false;
 	vm->log_lavel = 0;
 	vm->players_num = 0;

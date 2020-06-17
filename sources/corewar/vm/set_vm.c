@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 20:28:52 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 19:06:54 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 15:02:31 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ static void	parse_args(t_vm *vm, char **argv, t_list **input_champs)
 	while (*argv)
 	{
 		ret = 0;
-		if (!ft_strcmp(*argv, "-d") || !ft_strcmp(*argv, "--dump"))
+		if (!ft_strcmp(*argv, "-dump"))
 			ret = set_dump(vm, *(argv + 1));
-		else if (!ft_strcmp(*argv, "-s") || !ft_strcmp(*argv, "--show"))
+		else if (!ft_strcmp(*argv, "-s"))
 			ret = set_show(vm, *(argv + 1));
 		else if (!ft_strcmp(*argv, "-a"))
 			ret = set_aff(vm);
-		else if (!ft_strcmp(*argv, "-l") || !ft_strcmp(*argv, "--log"))
+		else if (!ft_strcmp(*argv, "-l"))
 			ret = set_loglevel(vm, *(argv + 1));
-		else if (!ft_strcmp(*argv, "-n") || !ft_strcmp(*argv, "--num"))
+		else if (!ft_strcmp(*argv, "-n"))
 			ret = set_champ(input_champs, true, *(argv + 1), *(argv + 2));
 		else if (is_filename(*argv, BYTECODE_FILENAME_SUFFIX))
 			ret = set_champ(input_champs, false, NULL, *(argv));
