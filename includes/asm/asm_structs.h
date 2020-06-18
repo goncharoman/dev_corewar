@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 01:48:05 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/10 02:12:27 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 15:52:14 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_label		t_label;
 
 enum			e_type
 {
+	NONE,
 	CMD,
 	STR,
 	LBL,
@@ -64,6 +65,7 @@ struct			s_program
 	uint32_t	position;
 	uint32_t	size;
 	t_list		*labels;
+	t_list		*tokens_list;
 };
 
 struct			s_op

@@ -6,11 +6,12 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 19:05:25 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/18 20:04:14 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/18 02:28:30 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar_vm.h>
+#include <corewar_op.h>
 
 static uint32_t	instruct_offset(t_cursor *cursor)
 {
@@ -32,19 +33,19 @@ static void		move_cursor(t_cursor *cursor, int32_t offset)
 	ft_bzero(cursor->oper_args_types, 3);
 }
 
-void	next_oper(t_vm *vm, t_cursor *cursor)
+void			next_oper(t_vm *vm, t_cursor *cursor)
 {
 	int	code;
 
 	code = vm->arena[cursor->pc];
 	if (code >= 0x01 && code <= 0x10)
 	{
-		cursor->oper = &op_tab[code - 1];
+		cursor->oper = &g_tab[code - 1];
 		cursor->cycles_to_exec = cursor->oper->cycles_to_exec;
 	}
 }
 
-void	exec_oper(t_vm *vm, t_cursor *cursor)
+void			exec_oper(t_vm *vm, t_cursor *cursor)
 {
 	uint32_t	offset;
 
@@ -53,7 +54,7 @@ void	exec_oper(t_vm *vm, t_cursor *cursor)
 	{
 		get_types(vm, cursor);
 		if (valid_args(vm, cursor))
-			offset = op_handlers[cursor->oper->code - 1](vm, cursor);
+			offset = g_handlers[cursor->oper->code - 1](vm, cursor);
 		else
 			offset = instruct_offset(cursor);
 		if (vm->log_lavel & LOG_MOVE && offset)

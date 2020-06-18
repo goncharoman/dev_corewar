@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 04:09:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/10 05:30:55 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/15 14:44:37 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static t_type	check_next_symbols(t_parseln *parseln)
 	t_bool		sign;
 
 	start = parseln->col;
-	sign = parseln->line[start] == '-';
+	sign = parseln->line[start] == '-' && start++;
 	while (ft_isdigit(parseln->line[start]))
 		start++;
 	if (is_spec_smb(parseln->line[start]))
 		return (IND);
 	if (sign)
-		syntax_error(parseln->row, parseln->col);
+		return (NONE);
 	if (parseln->line[start] == LABEL_CHAR)
 		return (LBL);
 	while (parseln->line[start] && ft_strchr(LABEL_CHARS, parseln->line[start]))

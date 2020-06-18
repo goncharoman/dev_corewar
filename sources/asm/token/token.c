@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 13:55:47 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/10 05:34:33 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 02:38:55 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ t_token	*create_token(char *value, t_type type, unsigned row, unsigned col)
 		term(TOKEN_MEMALLOC_ERR_MSG);
 	token->value = value;
 	token->type = type;
-	token->row = row;
-	token->col = col;
+	token->row = row == 0 ? 1 : row;
+	token->col = col + 1 - (type == DIRL);
 	return (token);
 }
 
@@ -42,5 +42,6 @@ void	del_token(void *token, size_t size)
 		return ;
 	ft_strdel(&((t_token*)token)->value);
 	free(token);
-	size = 0;
+	if (size != 0)
+		size = 0;
 }

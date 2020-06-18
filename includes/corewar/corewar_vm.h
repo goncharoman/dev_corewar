@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:13:04 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/19 03:14:38 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 20:29:07 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ t_vm		*create_vm();
 void		set_vm(t_vm *vm, char **argv);
 void		remove_vm(t_vm *vm);
 
-int8_t		set_show(t_vm *vm, char *value);
 int8_t		set_dump(t_vm *vm, char *value);
-int8_t		set_champ(t_list **champ_lst, t_bool set_id, char *value,
-			char *champ_name);
+int8_t		set_champ(t_vm *vm, t_bool set_id, char *value, char *champ_name);
 int8_t		set_loglevel(t_vm *vm, char *value);
 int8_t		set_aff(t_vm *vm);
 
@@ -48,7 +46,7 @@ int32_t		get_byte(uint8_t *mem, uint32_t addr);
 int32_t		get_value(uint8_t *mem, uint32_t addr, uint8_t size);
 int32_t		get_avalue(uint8_t *mem, t_cursor *cursor, uint32_t *offset,
 			uint8_t index);
-int32_t 	get_addr(uint8_t *mem, uint32_t addr);
+int32_t		get_addr(uint8_t *mem, uint32_t addr);
 void		cycles_to_die_check(t_vm *vm, int32_t *check_counts,
 			int32_t *count);
 

@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:17:05 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/19 04:22:42 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 22:41:45 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,11 @@
 # define STR_MEMALLOC_ERR_MSG		"ERROR: String memory allocation error"
 # define MAX_PLAYERS_ERR_MSG		"ERROR: Too much players"
 # define CURSOR_MEMALLOC_ERR_MSG	"ERROR: Cursor memmory allocation error"
+
+# define MIN_PLAYERS_ERR_MSG		"ERROR: No active players"
+# define WARNING					"WARNING"
+
+void	error(t_vm *vm, const char *message);
+void	remove_player_warning(t_player **player, const char *message);
 
 #endif

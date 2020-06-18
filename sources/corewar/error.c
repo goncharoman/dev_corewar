@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   translator.c                                       :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 12:56:35 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 16:58:25 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/06/17 20:22:59 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/06/17 22:43:03 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <corewar_errors.h>
 
-void	translate(const char *filename)
+void	error(t_vm *vm, const char *message)
 {
-	int			fd;
-	t_list		*tokens_list;
-	t_program	*program;
+	ft_fprintf(2, "%s\n", message);
+	remove_vm(vm);
+	exit(1);
+}
 
-	if ((fd = open(filename, O_RDONLY)) == -1)
-		term(OPEN_INFILE_ERR_MSG);
-	tokens_list = NULL;
-	program = NULL;
-	parse(&tokens_list, fd);
-	comp(&tokens_list, &program);
-	write_bytecode_file(filename, program);
-	del_program(&program);
+void	remove_player_warning(t_player **player, const char *message)
+{
+	ft_fprintf(2, "%s: Player %s (%s) ", message,
+					(*player)->name, (*player)->comment);
+	ft_fprintf(2, "has empty code and was deleted from competition\n");
+	remove_player(player);
 }

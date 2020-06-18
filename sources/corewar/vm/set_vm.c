@@ -6,13 +6,13 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 20:28:52 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/16 16:52:10 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 22:35:13 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar_vm.h>
 
-static void set_cursors(t_vm *vm)
+static void	set_cursors(t_vm *vm)
 {
 	uint32_t	pc;
 	int			i;
@@ -43,54 +43,57 @@ static void	place_in_arena(t_vm *vm)
 	}
 }
 
-static void	set_vm_players(t_vm *vm, t_list **input_champs)
+static void	set_vm_players(t_vm *vm)
 {
 	uint32_t	index;
 
-	if (!*input_champs || ft_lstlen(*input_champs) > MAX_PLAYERS)
-		term(MAX_PLAYERS_ERR_MSG);
+	if (!vm->tmp_players_lst || ft_lstlen(vm->tmp_players_lst) > MAX_PLAYERS)
+		error(vm, !vm->tmp_players_lst ?
+			MIN_PLAYERS_ERR_MSG : MAX_PLAYERS_ERR_MSG);
 	index = 1;
-	while (*input_champs && index <= MAX_PLAYERS)
+	while (vm->tmp_players_lst && index <= MAX_PLAYERS)
 	{
-		if (!(vm->players[index - 1] = next_player(input_champs, index)))
+		if (!(vm->players[index - 1] = \
+				next_player(&vm->tmp_players_lst, index)))
+		{
+			remove_vm(vm);
 			print_help();
+		}
 		vm->players_num++;
 		index++;
 	}
 }
 
-static void	parse_args(t_vm *vm, char **argv, t_list **input_champs)
+static void	parse_args(t_vm *vm, char **argv)
 {
 	int8_t	ret;
 
 	while (*argv)
 	{
 		ret = 0;
-		if (!ft_strcmp(*argv, "-d") || !ft_strcmp(*argv, "--dump"))
+		if (!ft_strcmp(*argv, "-dump"))
 			ret = set_dump(vm, *(argv + 1));
-		else if (!ft_strcmp(*argv, "-s") || !ft_strcmp(*argv, "--show"))
-			ret = set_show(vm, *(argv + 1));
 		else if (!ft_strcmp(*argv, "-a"))
 			ret = set_aff(vm);
-		else if (!ft_strcmp(*argv, "-l") || !ft_strcmp(*argv, "--log"))
+		else if (!ft_strcmp(*argv, "-l"))
 			ret = set_loglevel(vm, *(argv + 1));
-		else if (!ft_strcmp(*argv, "-n") || !ft_strcmp(*argv, "--num"))
-			ret = set_champ(input_champs, true, *(argv + 1), *(argv + 2));
+		else if (!ft_strcmp(*argv, "-n"))
+			ret = set_champ(vm, true, *(argv + 1), *(argv + 2));
 		else if (is_filename(*argv, BYTECODE_FILENAME_SUFFIX))
-			ret = set_champ(input_champs, false, NULL, *(argv));
+			ret = set_champ(vm, false, NULL, *(argv));
 		if (!ret)
+		{
+			remove_vm(vm);
 			print_help();
+		}
 		argv += ret;
 	}
 }
 
-void	set_vm(t_vm *vm, char **argv)
+void		set_vm(t_vm *vm, char **argv)
 {
-	t_list	*input_champs;
-
-	input_champs = NULL;
-	parse_args(vm, argv, &input_champs);
-	set_vm_players(vm, &input_champs);
+	parse_args(vm, argv);
+	set_vm_players(vm);
 	place_in_arena(vm);
 	set_cursors(vm);
 }

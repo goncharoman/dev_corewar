@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 15:40:43 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/01 18:42:01 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/11 22:30:21 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,21 @@ void		write_num(t_program *program, uint8_t size, int32_t value)
 {
 	program->position += \
 		write_int(program->code, program->position, size, value);
+}
+
+t_bool		is_arg(t_type type)
+{
+	return ((t_bool)(type == REG || type == DIR || type == DIRL ||
+				type == IND || type == INDL));
+}
+
+uint8_t		ttype_to_targ(t_type token_type)
+{
+	if (token_type == DIR || token_type == DIRL)
+		return (T_DIR);
+	if (token_type == IND || token_type == INDL)
+		return (T_IND);
+	if (token_type == REG)
+		return (T_REG);
+	return (0);
 }

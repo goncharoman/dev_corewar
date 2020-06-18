@@ -6,15 +6,15 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 12:58:16 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/15 14:26:46 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/14 22:09:33 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int print_help()
+void	print_help(void)
 {
-	/* TODO: написать help */
-	printf("this is help\n");
-	return (0);
+	ft_printf("Usage: ./asm <sourcefile.s>\n");
+	ft_printf("\t <sourcefile> - source file for assamble to bytecode\n");
+	exit(1);
 }

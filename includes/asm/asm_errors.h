@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 20:41:28 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/10 01:27:08 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 02:50:48 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,15 @@
 
 # define PROGRAM_NAME_FAIL_MSG		"FAIL: Wrong program name"
 # define PROGRAN_COMMENT_FAIL_MSG	"FAIL: Wrong programm comment"
-
 # define UNEXP_TOKEN_MSG			"Unexpected token"
-# define INVALID_ARG_MSG			"Invalid argument type"
+# define INVALID_ARG_MSG			"Invalid argument"
 # define UNDEC_LABEL_MSG			"Undeclared label"
 
 void	print_position(unsigned row, unsigned col);
 void	term(const char *message);
-void	syntax_error(unsigned row, unsigned col);
-void	program_error(const char *message);
-void	token_error(t_token *token);
-void	invalid_arg(t_token *token);
-void	label_error(t_label *label);
+void	lexical_error(t_parseln *parseln, t_list **tokens, t_token *token);
+void	program_error(t_program **program, const char *message);
+void	token_error(t_program **program, t_token *token);
+void	invalid_arg(t_program **program, t_token *token, t_op *op, int arg_n);
+void	label_error(t_program **program, t_label *label);
 #endif

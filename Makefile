@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/06/10 04:52:48 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/06/17 20:26:56 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,7 @@ COREWAR_HEADERS = $(addprefix $(COREWAR_HEADERS_DIR)/, \
 	corewar_player.h \
 	corewar_cursor.h \
 	corewar_op.h \
+	corewar_handlers.h \
 	)
 
 #   sources
@@ -125,6 +126,7 @@ COREWAR_SOURCES_INNER_DIR = $(addprefix $(COREWAR_NAME)/, \
 COREWAR_SOURCES = $(addprefix $(COREWAR_NAME)/, \
 	corewar.c \
 	help.c \
+	error.c \
  	)
 COREWAR_SOURCES += $(addprefix $(COREWAR_NAME)/vm/, \
 	args.c \
@@ -205,7 +207,7 @@ LIB_CONNECT = -lft -L$(LIB_DIR)
 
 # COMP
 CC = gcc
-FLAGS = -Wall -Wextra -g
+FLAGS = -Wall -Wextra -Werror -g
 
 INCLUDES = \
 	-I$(LIB_HEADERS) \
@@ -255,7 +257,7 @@ clean:
 
 fclean: clean
 	@ $(MAKE) -sC $(LIB_DIR) fclean
-	@ rm -rf $(ASM_NAME)
+	@ rm -rf $(ASM_NAME) $(COREWAR_NAME)
 	@ printf "$(F_DIM)$(F_BOLD)$(GRAY)%-10s$(RESET) $(F_BOLD)$(ASM_NAME)$(RESET) $(YELLOW)were deleted$(RESET)\n" "(corewar)"
 
 re: fclean all

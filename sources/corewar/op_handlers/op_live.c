@@ -6,11 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:31:50 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/18 21:46:41 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 16:55:35 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <corewar_op.h>
+#include <corewar.h>
 
 inline static void	log_live(int32_t id, char *name)
 {
@@ -22,7 +22,7 @@ inline static void	log_oper(int32_t id, int32_t value)
 	ft_printf("P %4d | live %d\n", id + 1, value);
 }
 
-uint32_t	handler_live(t_vm *vm, t_cursor *cursor)
+uint32_t			handler_live(t_vm *vm, t_cursor *cursor)
 {
 	uint32_t	offset;
 	int32_t		arg;
@@ -42,5 +42,5 @@ uint32_t	handler_live(t_vm *vm, t_cursor *cursor)
 		log_oper(cursor->id, arg);
 	if (vm->log_lavel & LOG_LIVES && player)
 		log_live(FT_ABS(arg), player->name);
- 	return (offset);
+	return (offset);
 }

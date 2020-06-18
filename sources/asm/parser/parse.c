@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 17:43:52 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/10 05:00:21 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 02:51:36 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,22 @@ static void			parse_chunk(t_list **tokens, t_parseln *parseln)
 {
 	t_type	type;
 	t_token	*token;
+	t_bool	err;
 
+	err = true;
 	type = get_type(parseln);
-	token = create_token(NULL, type, parseln->row,
-		parseln->col + (parseln->col == 0));
+	token = create_token(NULL, type, parseln->row, parseln->col);
 	if (type == CMD || type == DIRL || type == INDL || type == LBL ||
 			type == OPR || type == REG)
-		parse_name(parseln, token);
+		err = parse_name(parseln, token);
 	else if (type == STR)
-		parse_str(parseln, token);
+		err = parse_str(parseln, token);
 	else if (type == DIR || type == IND)
-		parse_num(parseln, token);
+		err = parse_num(parseln, token);
+	else if (type == NONE)
+		err = false;
+	if (!err)
+		lexical_error(parseln, tokens, token);
 	add_token(tokens, token);
 }
 
@@ -49,7 +54,7 @@ void				parse(t_list **tokens, int fd)
 				parse_chunk(tokens, &parseln);
 		}
 		if (parseln.size > 0 && parseln.size == parseln.col)
-			add_endtoken(tokens, ENDLN, parseln.row, parseln.col + 1);
+			add_endtoken(tokens, ENDLN, parseln.row, parseln.col);
 		ft_strdel(&parseln.line);
 	}
 	add_endtoken(tokens, END, parseln.row + 1, 0);

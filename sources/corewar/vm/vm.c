@@ -6,13 +6,13 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:12:24 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/19 04:26:57 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 20:35:31 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar_vm.h>
 
-t_vm		*create_vm()
+t_vm		*create_vm(void)
 {
 	t_vm	*vm;
 
@@ -21,7 +21,6 @@ t_vm		*create_vm()
 	vm->cursors = NULL;
 	vm->cursors_count = 0;
 	vm->dump_cycles = -1;
-	vm->show_cycles = -1;
 	vm->aff = false;
 	vm->log_lavel = 0;
 	vm->players_num = 0;
@@ -29,6 +28,7 @@ t_vm		*create_vm()
 	vm->live_count = 0;
 	vm->last_alive_player = NULL;
 	vm->cycles_to_die = CYCLE_TO_DIE;
+	vm->tmp_players_lst = NULL;
 	return (vm);
 }
 
@@ -47,5 +47,7 @@ void		remove_vm(t_vm *vm)
 		ft_lstdel(&(vm->cursors), &remove_cursor_from_list);
 	if (vm->players_num > 0)
 		remove_players_array(vm->players, vm->players_num);
+	if (vm->tmp_players_lst != 0)
+		ft_lstdel(&vm->tmp_players_lst, &remove_player_from_lst);
 	ft_memdel((void**)&vm);
 }

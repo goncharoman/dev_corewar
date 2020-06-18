@@ -6,11 +6,31 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 22:11:45 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/19 00:45:30 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 16:27:51 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar_vm.h>
+
+static void	show_arena(uint8_t *arena)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		ft_printf("%06p : ", i);
+		j = 0;
+		while (j < 32)
+		{
+			ft_printf("%02x ", arena[i + j]);
+			j++;
+		}
+		ft_printf("\n");
+		i += 32;
+	}
+}
 
 static void	exec_cursor(t_vm *vm, t_cursor *cursor)
 {
@@ -37,7 +57,7 @@ static void	next_cycle(t_vm *vm)
 	}
 }
 
-void	run(t_vm *vm)
+void		run(t_vm *vm)
 {
 	int32_t	check_cycles;
 	int32_t checks_count;
@@ -49,14 +69,8 @@ void	run(t_vm *vm)
 		if (vm->dump_cycles != -1
 			&& vm->cycles_count == (uint32_t)vm->dump_cycles)
 		{
-			// show_arena(vm->arena);
+			show_arena(vm->arena);
 			exit(0);
-		}
-		else if (vm->show_cycles > 0 && !(vm->cycles_count % vm->show_cycles))
-		{
-			// show_arena(vm->arena);
-			if (ft_getchar() != '\n')
-				;
 		}
 		next_cycle(vm);
 		check_cycles++;
