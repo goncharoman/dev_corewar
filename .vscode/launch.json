@@ -4,30 +4,30 @@
 	// Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
-		{
-			"name": "(lldb) Запустить",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/asm",
-			"args": ["./other/wasp.s"],
-			"stopAtEntry": true,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "lldb"
-		}
 		// {
 		// 	"name": "(lldb) Запустить",
 		// 	"type": "cppdbg",
 		// 	"request": "launch",
-		// 	"program": "${workspaceFolder}/corewar",
-		// 	"args": ["-l", "31", "./other/resources/champs/Gagnant.cor", "./other/resources/champs/slider2.cor"],
-		// 	// "args": ["-l", "30", "./test/wasp.cor"],
+		// 	"program": "${workspaceFolder}/asm",
+		// 	"args": ["./test/cases/simple/empty_code.s"],
 		// 	"stopAtEntry": true,
 		// 	"cwd": "${workspaceFolder}",
 		// 	"environment": [],
-		// 	"externalConsole": 	false,
+		// 	"externalConsole": false,
 		// 	"MIMode": "lldb"
 		// }
+		{
+			"name": "(lldb) Запустить",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/corewar",
+			"args": ["./test/cases/corewar_errors_cases/without_code/test.cor"],
+			// "args": ["-l", "30", "./test/wasp.cor"],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": 	false,
+			"MIMode": "lldb"
+		}
 	]
 }
