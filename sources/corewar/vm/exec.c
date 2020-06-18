@@ -6,11 +6,12 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 19:05:25 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 19:05:31 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/18 02:28:30 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar_vm.h>
+#include <corewar_op.h>
 
 static uint32_t	instruct_offset(t_cursor *cursor)
 {

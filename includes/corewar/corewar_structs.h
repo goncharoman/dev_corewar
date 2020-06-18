@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:03:42 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 18:59:55 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 20:35:31 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ struct			s_vm
 	t_player	*last_alive_player;
 	uint32_t	live_count;
 	int32_t		dump_cycles;
-	int32_t		show_cycles;
 	t_bool		aff;
 	int8_t		log_lavel;
+	t_list		*tmp_players_lst;
 };
 
 struct			s_player

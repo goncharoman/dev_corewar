@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:03:17 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 18:58:58 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 16:54:49 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,23 +162,6 @@ static t_op		g_tab[OP_NUMS] = {
 		.cycles_to_exec = 2,
 	},
 };
-
-uint32_t	handler_live(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_ld(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_st(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_add(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_sub(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_and(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_or(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_xor(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_zjmp(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_ldi(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_sti(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_fork(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_lld(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_lldi(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_lfork(t_vm *vm, t_cursor *cursor);
-uint32_t	handler_aff(t_vm *vm, t_cursor *cursor);
 
 static uint32_t (*g_handlers[OP_NUMS])(t_vm*, t_cursor*) = {
 	&handler_live,

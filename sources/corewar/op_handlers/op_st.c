@@ -6,11 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 01:52:28 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/17 05:29:19 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 16:55:51 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <corewar_op.h>
+#include <corewar.h>
 
 inline static void	log_oper(int32_t id, int32_t r_id, int32_t addr)
 {

@@ -6,11 +6,11 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 02:10:23 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/05/16 04:54:10 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 16:55:12 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <corewar_op.h>
+#include <corewar.h>
 
 uint32_t	handler_aff(t_vm *vm, t_cursor *cursor)
 {

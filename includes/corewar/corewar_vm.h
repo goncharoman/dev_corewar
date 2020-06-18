@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:13:04 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 18:59:18 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/17 20:29:07 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ t_vm		*create_vm();
 void		set_vm(t_vm *vm, char **argv);
 void		remove_vm(t_vm *vm);
 
-int8_t		set_show(t_vm *vm, char *value);
 int8_t		set_dump(t_vm *vm, char *value);
-int8_t		set_champ(t_list **champ_lst, t_bool set_id, char *value,
-			char *champ_name);
+int8_t		set_champ(t_vm *vm, t_bool set_id, char *value, char *champ_name);
 int8_t		set_loglevel(t_vm *vm, char *value);
 int8_t		set_aff(t_vm *vm);
 
