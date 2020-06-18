@@ -1,0 +1,3 @@
+log_flag=l
+files="./zork.cor ./zork.cor ./zork.cor ./zork.cor ./zork.cor"
+exitcode_expect=1
