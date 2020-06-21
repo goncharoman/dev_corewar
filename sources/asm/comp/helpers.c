@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: kbins <kbins@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/22 15:40:43 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/11 22:30:21 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/21 18:31:20 by dschimme          #+#    #+#             */
+/*   Updated: 2020/06/21 18:33:45 by kbins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,19 @@ t_bool		is_cmd(char *arg, const char *command)
 	return (!ft_strcmp(arg, command + 1));
 }
 
-uint32_t	write_int(uint8_t *code, uint32_t position, uint8_t size,
-			int32_t value)
-{
-	uint8_t	i;
-
-	i = 0;
-	while (i < size)
-		code[position++] = (uint8_t)((value >> (8 * (size - ++i)) & 0xFF));
-	return ((uint32_t)size);
-}
-
-void		write_num(t_program *program, uint8_t size, int32_t value)
-{
-	program->position += \
-		write_int(program->code, program->position, size, value);
-}
-
 t_bool		is_arg(t_type type)
 {
 	return ((t_bool)(type == REG || type == DIR || type == DIRL ||
 				type == IND || type == INDL));
+}
+
+t_bool		reg_nbr_valid(char *value)
+{
+	int		tmp;
+
+	if ((tmp = ft_atoi((const char*)(value + 1))) > 0 && tmp <= REG_NUMBER)
+		return (true);
+	return (false);
 }
 
 uint8_t		ttype_to_targ(t_type token_type)

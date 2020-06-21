@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translator.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: dschimme <dschimme@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 12:56:35 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 16:58:25 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/21 18:28:51 by dschimme          #+#    #+#             */
+/*   Updated: 2020/06/21 18:28:54 by dschimme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -1,3 +1,0 @@
-log_flag="l"
-files="-n 1 ./zork_1.cor -n 4 ./zork_4.cor -n 3 ./zork_3.cor -n 2 ./zork_2.cor"
-exitcode_expect=0

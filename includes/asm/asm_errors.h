@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_errors.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: dschimme <dschimme@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/02 20:41:28 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/17 02:50:48 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/21 18:25:29 by dschimme          #+#    #+#             */
+/*   Updated: 2020/06/21 18:27:43 by dschimme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define UNEXP_TOKEN_MSG			"Unexpected token"
 # define INVALID_ARG_MSG			"Invalid argument"
 # define UNDEC_LABEL_MSG			"Undeclared label"
+# define WRONG_REG_NBR_MSG			"Wrong register number"
 
 void	print_position(unsigned row, unsigned col);
 void	term(const char *message);
@@ -44,4 +45,5 @@ void	program_error(t_program **program, const char *message);
 void	token_error(t_program **program, t_token *token);
 void	invalid_arg(t_program **program, t_token *token, t_op *op, int arg_n);
 void	label_error(t_program **program, t_label *label);
+void	reg_error(t_program **program, t_token *token);
 #endif

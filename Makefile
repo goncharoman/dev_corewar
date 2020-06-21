@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/06/17 20:26:56 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/06/20 01:34:57 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ COMMON_NAME = common
 # PROJECT DIRECTORIES
 HEADERS_DIR = ./includes
 SOURCES_DIR = ./sources
-LIB_DIR = ./lib
+LIB_DIR = ./libft
 TEMP_DIR = ./temp
 
 # ASM
@@ -55,7 +55,7 @@ ASM_SOURCES_INNER_DIR = $(addprefix $(ASM_NAME)/, \
 	parser \
 	token \
 	comp \
-	output \
+	write_file \
 	errors \
 	)
 ASM_SOURCES = $(addprefix $(ASM_NAME)/, \
@@ -80,17 +80,19 @@ ASM_SOURCES += $(addprefix $(ASM_NAME)/comp/, \
 	fill_calls.c \
 	helpers.c \
 	label.c \
+	write.c \
 	op.c \
 	program.c \
 	program_args.c \
 	program_info.c \
 	program_instrct.c \
 	)
-ASM_SOURCES += $(addprefix $(ASM_NAME)/output/, \
+ASM_SOURCES += $(addprefix $(ASM_NAME)/write_file/, \
 	write_bytecode.c \
 	)
 ASM_SOURCES += $(addprefix $(ASM_NAME)/errors/, \
-	errors.c \
+	errors_handlers_1.c \
+	errors_handlers_2.c \
 	)
 
 #   temps
@@ -142,8 +144,6 @@ COREWAR_SOURCES += $(addprefix $(COREWAR_NAME)/vm/, \
 	log.c \
 	print.c \
  	)
-# COREWAR_SOURCES += $(addprefix $(COREWAR_NAME)/errors/, \
-#  	)
 COREWAR_SOURCES += $(addprefix $(COREWAR_NAME)/player/, \
 	player.c \
 	read_player.c \

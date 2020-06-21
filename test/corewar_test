@@ -18,16 +18,10 @@ YELLOW="\033[38;5;184m"
 RESET="\033[0m"
 BLUE="\033[38;5;32m"
 
-### GLOBAL ###
+###   GLOBAL   ###
 WIDTH=$(tput cols)
 
-### FUNCTIONS ###
-
-function realpath() {
-    folder=$(dirname "$1")
-	echo $(cd "$folder"; pwd)/$(basename "$1");
-}
-
+###   FUNCS   ###
 function print_header {
 	title=$1
 	printf "${F_BOLD}${WHITE}%*s${RESET}\n" $(( (${#title} + $WIDTH) / 2 )) "$title"
@@ -43,30 +37,55 @@ function print_test_header {
 	printf "${GRAY}%*s\n${RESET}" $(( $WIDTH - (${#2} + 5) )) "[$3/]"
 }
 
-function report {
-	if [[ $2 -eq 0 ]]; then
+function exec_status_with_msg {
+	if [[ $2 -eq 1 ]]; then
 		printf "  %-30s\t$YELLOW$F_BOLD[ERROR]$RESET\n" "$1"
 	else
 		printf "  %-30s\t$GREEN$F_BOLD[DONE]$RESET\n" "$1"
 	fi
 }
 
-function assert_report {
+function assert_with_msg {
 	if [[ $2 -eq 1 ]]; then
-		printf "  %-30s\t$RED$F_BOLD[FAIL]$RESET\n" "$1"
-	else
 		printf "  %-30s\t$GREEN$F_BOLD[OK]$RESET\n" "$1"
+	else
+		printf "  %-30s\t$RED$F_BOLD[FAIL]$RESET\n" "$1"
 	fi
 }
 
-function general_report {
+function test_result_with_msg {
 	if [[ $1 -eq 1 ]] ; then
 		printf "      result: ${GREEN}[OK]${RESET}\n"
 	else
 		printf "      result: ${RED}[FAIL]${RESET}\n"
 	fi
 }
-### END UI ###
+###   END UI   ###
+
+###   HELPERS    ###
+function clear_out {
+	rm -rf $OUT > /dev/null 2>&1
+	mkdir -p $OUT > /dev/null 2>&1
+}
+
+function realpath {
+    folder=$(dirname "$1")
+	echo $(cd "$folder"; pwd)/$(basename "$1");
+}
+
+function corewar_and_asm_check {
+if [[ ! -e $ASM ]] || [[ ! -e $COREWAR ]]; then
+	printf "not found your asm and/or corewar\n"
+	exit 1
+fi
+
+if [[ ! -e $REF_ASM ]] || [[ ! -e $REF_COREWAR ]]; then
+	printf "not found reference asm and/or corewar\n"
+	exit 1
+fi
+}
+###   END CHECK   ###
+###   END HELPERS   ###
 
 ### FOR ASM
 # exec reference ./asm with test case (from ./cases) and compares with
@@ -104,269 +123,325 @@ COREWAR="../corewar"
 
 ASM_ERRORS_CASES=$(find $CASES/asm_errors_cases -type d -mindepth 1 -maxdepth 1)
 ASM_CHAMPIONS_CASES=$(find $CASES/asm_champions_cases -name "*.s")
-COREWAR_CASES=$(find $CASES/corewar_cases -type d -mindepth 1 -maxdepth 1)
+COREWAR_CHAMPS_CASES=$(find $CASES/corewar_cases -type d -mindepth 1 -maxdepth 1)
 COREWAR_ERRORS_CASES=$(find $CASES/corewar_errors_cases -type d -mindepth 1 -maxdepth 1)
+COREWAR_ASSERT_CASES=$(find $CASES/corewar_assert_cases -type d -mindepth 1 -maxdepth 1)
 
-# ERROR COUNTER
-errors_count=0
+###   TESTING FUNC   ###
+function asm_errormanage_test {
+	case=$1
 
-if [[ ! -e $ASM ]] || [[ ! -e $COREWAR ]]; then
-	printf "not found your asm and/or corewar\n"
-	exit 1
-fi
+	basename=${case##*/}
+	code="$case/$basename.s"
+	# assert
+	assert="$case/assert"
 
-if [[ ! -e $REF_ASM ]] || [[ ! -e $REF_COREWAR ]]; then
-	printf "not found reference asm and/or corewar\n"
-	exit 1
-fi
+	if [[ ! -e $code ]] || [[ ! -e $assert ]]; then
+		echo "[$case] - ERROR IN TEST CASE DIR [see help]"
+		return ;
+	fi
 
-if [[ -e $OUT ]]; then
-	rm -rf $OUT
-	mkdir -p $OUT
-fi
+	source $assert
+	assert=$exitcode
 
+	# create dir in ./out with test case name
+	out_dir="$OUT/asm_errmanage_$basename.out"
+	mkdir -p $out_dir
+
+	print_test_header $2 $basename $out_dir
+
+	# EXEC REFERENCE ASM (to see the behavior reference asm )
+	error=$($REF_ASM $code)
+	echo "$error" > "$out_dir/ref_$basename.out"
+
+	ref_status=1
+	bytecode=${code//".s"/".cor"}
+	if [[ -e $bytecode ]]; then
+		xxd $bytecode > "$out_dir/ref_$basename.bytecode"
+		ref_status=0
+		rm -rf $bytecode
+	fi
+	exec_status_with_msg "behavior of referece asm:" ref_status
+
+	# EXEC YOUR ASM
+	error=$($ASM $code 2>&1)
+	# save exit_code
+	exitcode=${?}
+	echo "$error" > "$out_dir/test_$basename.out"
+
+	test_status=1
+	bytecode=${code//".s"/".cor"}
+	if [[ -e $bytecode ]]; then
+		xxd $bytecode > "$out_dir/test_$basename.bytecode"
+		test_status=0
+		rm -rf $bytecode
+	fi
+	exec_status_with_msg "behavior of your asm:" test_status
+
+	# FINAL RESULT
+	other_status=1
+	# check: exitcode == assert
+	if [[ $exitcode -ne $assert ]]; then
+		other_status=0
+	fi
+
+	if [[ -e "$out_dir/ref_$basename.bytecode" && -e "$out_dir/test_$basename.bytecode" ]]; then
+		diff -us "$out_dir/ref_$basename.bytecode" "$out_dir/test_$basename.bytecode" 1>/dev/null 2>&1
+		other_status=!${?}
+	fi
+
+	# COMPARE
+	if [[ $other_status -eq 1 ]]; then
+		test_result_with_msg 1
+		return 0
+	else
+		test_result_with_msg 0
+		return 1
+	fi
+}
+
+function asm_champions_test {
+	case=$1
+
+	basename=$(basename "$case" .s)
+	out_dir="$OUT/champ_$basename.out"
+	mkdir -p $out_dir
+
+	print_test_header $2 $basename $out_dir
+
+	error=$($REF_ASM $case)
+	echo "$error" > "$out_dir/ref_$basename.out"
+
+	# EXEC REFERENCE ASM
+	ref_status=1
+	bytecode=${case//".s"/".cor"}
+	if [[ -e $bytecode ]]; then
+		xxd $bytecode > "$out_dir/ref_$basename.bytecode"
+		ref_status=0
+		rm -rf $bytecode
+	fi
+
+	exec_status_with_msg "ref asm: create bytecode" ref_status
+
+	# EXEC YOUR ASM
+	error=$($ASM $case 2>&1)
+	echo "$error" > "$out_dir/test_$basename.out"
+
+	test_status=1
+	bytecode=${case//".s"/".cor"}
+	if [[ -e $bytecode ]]; then
+		xxd $bytecode > "$out_dir/test_$basename.bytecode"
+		test_status=0
+		rm -rf $bytecode
+	fi
+
+	exec_status_with_msg "your asm: create bytecode" test_status
+
+	if [[ -e "$out_dir/ref_$basename.bytecode" && -e "$out_dir/test_$basename.bytecode" ]]; then
+		diff -us "$out_dir/ref_$basename.bytecode" "$out_dir/test_$basename.bytecode" 1>/dev/null 2>&1
+		other_status=!${?}
+	fi
+
+	# COMPARE
+	if [[ $ref_status -eq $test_status ]] && [[ $other_status -eq 1 ]]; then
+		test_result_with_msg 1
+	else
+		test_result_with_msg 0
+	fi
+}
+
+function corewar_eerrormanage_test {
+	case=$1
+
+	basename=${case##*/}
+	# assert
+	script="$case/run_script"
+	assert="$case/assert"
+
+	out_dir="$(realpath $OUT)/corewar_$basename.out"
+	print_test_header $2 $basename "$OUT/corewar_$basename.out"
+
+	if [[ ! -e $script ]] || [[ ! -e $assert ]]; then
+		echo "[$case] - ERROR IN TEST CASE DIR [see help]"
+		return ;
+	fi
+
+	source $assert
+	assert=$exitcode
+
+	if [[ -e $script ]]; then
+		mkdir -p $out_dir
+		source $script
+		cd $case > /dev/null 2>&1; $COREWAR $args > $out_dir/test_$basename.trace 2>&1; exitcode=${?}; cd - > /dev/null 2>&1
+		test_status=1
+		if [[ $exitcode -ne $assert ]]; then
+			test_status=0
+		fi
+
+		assert_with_msg "test result" $test_status
+		return $(( !$test_status ))
+	else
+		echo "no script file"
+	fi
+}
+
+function corewar_champions_test {
+	case=$1
+
+	# name of test
+	basename=${case##*/}
+	# script file
+	script="$case/run_script"
+
+	out_dir="$(realpath $OUT)/corewar_$basename.out"
+	print_test_header $2 $basename "$OUT/corewar_errmanage_$basename.out"
+
+	if [ -e $script ];then
+		mkdir -p $out_dir
+
+		source $script
+
+		printf "${GRAY}ref corewar executing ....${RESET}\r"
+		cd $case > /dev/null 2>&1; $REF_COREWAR -v 31 $args > $out_dir/ref_$basename.trace 2>&1; cd - > /dev/null 2>&1
+
+		ref_status=1
+		if [[ -e "$out_dir/ref_$basename.trace" ]]; then
+			ref_status=0
+		fi
+		exec_status_with_msg "exec ref corewar" ref_status
+
+
+		printf "${GRAY}your corewar executing ....${RESET}\r"
+		cd $case > /dev/null 2>&1; $COREWAR -$log_flag 31 $args > $out_dir/test_$basename.trace 2>&1; exitcode=${?}; cd - > /dev/null 2>&1
+
+		test_status=1
+		if [[ -e "$out_dir/test_$basename.trace" && exitcode -eq 0 ]]; then
+			test_status=0
+		fi
+
+		exec_status_with_msg "exec test corewar" test_status
+
+		other_status=1
+		if [[ -e "$out_dir/ref_$basename.trace" && -e "$out_dir/test_$basename.trace" ]]; then
+			diff -us "$out_dir/ref_$basename.trace" "$out_dir/test_$basename.trace" 1>/dev/null 2>&1
+			other_status=!${?}
+		fi
+
+		if [[ $ref_status -eq $test_status ]] && [[ $other_status -eq 1 ]]; then
+			test_result_with_msg 1
+			return 0
+		else
+			test_result_with_msg 0
+			return 1
+		fi
+	else
+		echo "no script file"
+		continue
+	fi
+}
+
+function corewar_assert_test {
+	case=$1
+
+	basename=${case##*/}
+	# script file
+	script="$case/run_script"
+	assert="$case/assert"
+
+	out_dir="$(realpath $OUT)/corewar_assert_$basename.out"
+	print_test_header $2 $basename "$OUT/corewar_assert_$basename.out"
+
+	mkdir -p $out_dir
+	if [[ ! -e $script ]] || [[ ! -e $assert ]]; then
+		echo "[$case] - ERROR IN TEST CASE DIR [see help]"
+		return ;
+	fi
+
+	source $script
+	source $assert
+
+	printf "${GRAY}your corewar executing ....${RESET}\r"
+	cd $case > /dev/null 2>&1;
+	$COREWAR $args > "$out_dir/test_$basename.trace" 2>&1;
+	exitcode=${?};
+	cat "$assert_file" > "$out_dir/ref_$basename.trace"
+	cd - > /dev/null 2>&1
+
+	diff -us "$out_dir/test_$basename.trace" "$out_dir/ref_$basename.trace" 1>/dev/null 2>&1
+	test_status=!$?
+
+	assert_with_msg "result:" $test_status
+	return $(( !$test_status ))
+}
 ##### TESTING #####
+
+corewar_and_asm_check
+
 # TEST ASM
 if [[ ${1} == "asm" ]] ; then
 
-	# clear out
-	rm -rf $OUT/*
-
 	# TESTS COUNTS
-	count=0
+	TESTS_COUNT=0
+	# ERRORS COUNT
+	ERRORS_COUNT=0
 
 	print_header "ASM: ERRORS MANAGMENT"
-
 	for case in $ASM_ERRORS_CASES; do
-		# name of test
-		basename=${case##*/}
-		# code file
-		code="$case/$basename.s"
-		# assert
-		assert="$case/$basename.errcode"
-
-		if [[ ! -e $code ]] || [[ ! -e $assert ]]; then
-			echo "[$case] - ERROR IN TEST CASE DIR [see help]"
-			continue
-		fi
-
-		# create dir in ./out with test case name
-		out_dir="$OUT/errmanage_$basename.out"
-		mkdir -p $out_dir
-
-		print_test_header $count $basename $out_dir
-
-		# EXEC REFERENCE ASM (to see the behavior reference asm )
-		error=$($REF_ASM $code)
-		echo "$error" > "$out_dir/ref_$basename.out"
-
-		ref_status=0
-		bytecode=${code//".s"/".cor"}
-		if [[ -e $bytecode ]]; then
-			xxd $bytecode > "$out_dir/ref_$basename.bytecode"
-			ref_status=1
-			rm -rf $bytecode
-		fi
-		report "behavior of referece asm:" ref_status
-
-		# EXEC YOUR ASM
-		error=$($ASM $code 2>&1)
-		# save exit_code
-		exitcode=${?}
-		assert=$(tail -n 1 $assert)
-
-		echo "$error" > "$out_dir/test_$basename.out"
-
-		test_status=0
-		bytecode=${code//".s"/".cor"}
-		if [[ -e $bytecode ]]; then
-			xxd $bytecode > "$out_dir/test_$basename.bytecode"
-			test_status=1
-			rm -rf $bytecode
-		fi
-		report "behavior of your asm:" test_status
-
-		# FINAL RESULT
-		other_status=0
-		# check: exitcode == assert
-		if [[ $exitcode -ne $assert ]]; then
-			other_status=1
-		fi
-
-		if [[ -e "$out_dir/ref_$basename.bytecode" && -e "$out_dir/test_$basename.bytecode" ]]; then
-			diff -us "$out_dir/ref_$basename.bytecode" "$out_dir/test_$basename.bytecode" 1>/dev/null 2>&1
-			other_status=${?}
-		fi
-
-		# COMPARE
-		if [[ $ref_status -eq $test_status ]] && [[ $other_status -eq 0 ]]; then
-			general_report 1
-		else
-			general_report 0
-			(( errors_count ++ ))
-		fi
-
+		asm_errormanage_test $case $TESTS_COUNT
+		(( ERRORS_COUNT+=${?} ))
 		print_line_sep
-		((count++))
+		((TESTS_COUNT++))
 	done
 
 	echo -e "\n"
-
 	print_header "ASM: CHAMPIONS CHECKS"
-
 	for case in $ASM_CHAMPIONS_CASES; do
-		basename=$(basename "$case" .s)
-		out_dir="$OUT/champ_$basename.out"
-		mkdir -p $out_dir
-
-		print_test_header $count $basename $out_dir
-
-		error=$($REF_ASM $case)
-		echo "$error" > "$out_dir/ref_$basename.out"
-
-		# EXEC REFERENCE ASM
-		ref_status=0
-		bytecode=${case//".s"/".cor"}
-		if [[ -e $bytecode ]]; then
-			xxd $bytecode > "$out_dir/ref_$basename.bytecode"
-			ref_status=1
-			rm -rf $bytecode
-		fi
-
-		report "ref asm: create bytecode" ref_status
-
-		# EXEC YOUR ASM
-		error=$($ASM $case 2>&1)
-		echo "$error" > "$out_dir/test_$basename.out"
-
-		test_status=0
-		bytecode=${case//".s"/".cor"}
-		if [[ -e $bytecode ]]; then
-			xxd $bytecode > "$out_dir/test_$basename.bytecode"
-			test_status=1
-			rm -rf $bytecode
-		fi
-
-		report "your asm: create bytecode" test_status
-
-		if [[ -e "$out_dir/ref_$basename.bytecode" && -e "$out_dir/test_$basename.bytecode" ]]; then
-			diff -us "$out_dir/ref_$basename.bytecode" "$out_dir/test_$basename.bytecode" 1>/dev/null 2>&1
-			other_status=${?}
-		fi
-
-		# COMPARE
-		if [[ $ref_status -eq $test_status ]] && [[ $other_status -eq 0 ]]; then
-			general_report 1
-		else
-			general_report 0
-			(( errors_count++ ))
-		fi
-
+		asm_champions_test $case $TESTS_COUNT
+		(( ERRORS_COUNT+=$? ))
 		print_line_sep
-		((count++))
+		((TESTS_COUNT++))
 	done
 
 	# OTHER ERRORS
-	printf "${BOLD}TOTAL ERRORS:${RESET} %4d\n" $errors_count
+	printf "${BOLD}${WHITE}TOTAL ERRORS: %4d\n${RESET}" $ERRORS_COUNT
 
 # TEST COREWAR
 elif [[ ${1} == "corewar" ]]; then
 
-		count=0
-		rm -rf $OUT/*
+	TESTS_COUNT=0
+	ERRORS_COUNT=0
 
-		REF_COREWAR=$(realpath $REF_COREWAR)
-		COREWAR=$(realpath $COREWAR)
-		OUT=$(realpath $OUT)
+	REF_COREWAR=$(realpath $REF_COREWAR)
+	COREWAR=$(realpath $COREWAR)
 
-		print_header "COREWAR: TESTS"
-
-	for case in $COREWAR_CASES; do
-
-		# name of test
-		basename=${case##*/}
-		out_dir="$OUT/corewar_$basename.out"
-		# script file
-		script="$case/run_script"
-
-		print_test_header $count $basename $out_dir
-
-		if [ -e $script ];then
-			mkdir -p $out_dir
-
-			source $script
-
-			printf "${GRAY}ref corewar executing ....${RESET}\r"
-			cd $case > /dev/null 2>&1; $REF_COREWAR -v 31 $files > $out_dir/ref_$basename.trace 2>&1; cd - > /dev/null 2>&1
-
-			ref_status=0
-			if [[ -e "$out_dir/ref_$basename.trace" ]]; then
-				ref_status=1
-			fi
-			report "exec ref corewar" ref_status
-
-
-			printf "${GRAY}your corewar executing ....${RESET}\r"
-			cd $case > /dev/null 2>&1; $COREWAR -$log_flag 31 $files > $out_dir/test_$basename.trace 2>&1; exitcode=${?}; cd - > /dev/null 2>&1
-
-			test_status=0
-			if [[ -e "$out_dir/test_$basename.trace" && exitcode -eq 0 ]]; then
-				test_status=1
-			fi
-
-			report "exec test corewar" test_status
-
-			if [[ -e "$out_dir/ref_$basename.trace" && -e "$out_dir/test_$basename.trace" ]]; then
-				diff -us "$out_dir/ref_$basename.trace" "$out_dir/test_$basename.trace" 1>/dev/null 2>&1
-				other_status=${?}
-			fi
-
-			general_report ref_status test_status other_status
-
-		else
-			echo "no script file"
-			continue
-		fi
-
+	print_header "COREWAR: CAMPIONS TESTS"
+	for case in $COREWAR_CHAMPS_CASES; do
+		corewar_champions_test $case $TESTS_COUNT
+		((ERRORS_COUNT+=$?))
 		print_line_sep
-
-		((count++))
+		((TESTS_COUNT++))
 	done
 
-	# echo -e "\n"
-	# print_header "COREWAR: ERRORS MANAGMENT"
+	echo -e "\n"
+	print_header "COREWAR: ERRORS MANAGE TESTS"
+	for case in $COREWAR_ERRORS_CASES; do
+		corewar_eerrormanage_test $case $TESTS_COUNT
+		((ERRORS_COUNT+=$?))
+		print_line_sep
+		((TESTS_COUNT++))
+	done
 
-	# count=0
+	echo -e "\n"
+	print_header "COREWAR: FLAGS TESTS"
+	for case in $COREWAR_ASSERT_CASES; do
+		corewar_assert_test $case $TESTS_COUNT
+		((ERRORS_COUNT+=$?))
+		print_line_sep
+		((TESTS_COUNT++))
+	done
 
-	# for case in $COREWAR_ERRORS_CASES; do
+	printf "${BOLD}${WHITE}TOTAL ERRORS: %4d\n${RESET}" $ERRORS_COUNT
 
-	# 	basename=${case##*/}
-	# 	out_dir="$OUT/corewar_errmanage_$basename.out"
-	# 	script="$case/run_script"
-
-	# 	print_test_header $count $basename $out_dir
-
-	# 	if [[ -e $script ]]; then
-	# 		mkdir -p $out_dir
-
-	# 		source $script
-
-	# 		cd $case > /dev/null 2>&1; $COREWAR $files > $out_dir/test_$basename.trace 2>&1; exitcode=${?}; cd - > /dev/null 2>&1
-
-	# 		test_exitcode=0
-	# 		if [[ $exitcode -eq $exitcode_expect ]]; then
-	# 			test_exitcode=1
-	# 		fi
-
-	# 		if [[  ]]
-
-	# 		assert_report "test result" test_status
-	# 	else
-	# 		echo "no script file"
-	# 	fi
-
-	# 	print_line_sep
-	# 	((count++))
-	# done
-
+elif [[ ${1} == "clear" ]]; then
+	clear_out
 fi

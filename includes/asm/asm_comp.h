@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_comp.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: dschimme <dschimme@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/23 12:17:59 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/14 21:57:35 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/21 18:25:07 by dschimme          #+#    #+#             */
+/*   Updated: 2020/06/21 18:26:18 by dschimme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void		comp(t_list **tokens, t_program **program);
 void		get_program_info(t_list **head_lst, t_program *program);
 t_bool		is_cmd(char *arg, const char *command);
 t_bool		is_arg(t_type type);
+t_bool		reg_nbr_valid(char *value);
 uint8_t		ttype_to_targ(t_type token_type);
 t_program	*program_init();
 void		del_program(t_program **program);

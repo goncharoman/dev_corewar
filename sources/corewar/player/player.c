@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 23:46:33 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/17 22:20:55 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/18 20:50:07 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void		remove_player(t_player **player)
 {
 	ft_strdel(&((*player)->name));
 	ft_strdel(&((*player)->comment));
-	ft_memdel((void**)&((*player)->code));
+	if ((*player)->code)
+		ft_memdel((void**)&((*player)->code));
 	ft_memdel((void**)player);
 	*player = NULL;
 }

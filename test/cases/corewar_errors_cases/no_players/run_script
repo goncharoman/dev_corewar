@@ -1,3 +1,1 @@
-log_flag="l"
-files="-n 7 ./zork.cor"
-exitcode_expect=1
+args=""

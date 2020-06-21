@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program_instrct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: kbins <kbins@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/22 17:09:49 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 22:18:19 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/11 18:32:21 by dschimme          #+#    #+#             */
+/*   Updated: 2020/06/21 18:33:50 by kbins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,12 @@ static uint8_t	proc_arg(t_op *op, t_token *token, t_program *program,
 	if (token->type == DIR || token->type == IND)
 		proc_numeric(op, token, program);
 	else if (token->type == REG)
-		proc_reg(token, program);
+	{
+		if (reg_nbr_valid(token->value))
+			proc_reg(token, program);
+		else
+			reg_error(&program, token);
+	}
 	else
 		proc_call(op, token, program, begin_instruct);
 	if (token->type == DIR || token->type == DIRL)
@@ -106,8 +111,11 @@ void			get_program_code(t_list **head_lst, t_program *program)
 		if (program->position >= program->size)
 			increase_code_size(program);
 		if (token->type == LBL)
+		{
 			proc_label(token, program);
-		else if (token->type == OPR)
+			token = next_token(head_lst);
+		}
+		if (token->type == OPR)
 			proc_instruction(token, head_lst, program);
 		else if (token->type == ENDLN)
 			continue;

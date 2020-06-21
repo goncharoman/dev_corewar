@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_value.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: kbins <kbins@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/10 04:10:29 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/15 17:44:43 by ujyzene          ###   ########.fr       */
+/*   Created: 2020/05/21 18:29:39 by dschimme          #+#    #+#             */
+/*   Updated: 2020/06/21 18:33:57 by kbins            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_bool		parse_name(t_parseln *parseln, t_token *token)
 	if (parseln->col - start)
 	{
 		token->value = get_value(parseln, start);
-		if (parseln->line[parseln->col] == LABEL_CHAR)
+		if (token->type == LBL && parseln->line[parseln->col] == LABEL_CHAR)
 			parseln->col++;
 	}
 	else

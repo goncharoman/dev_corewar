@@ -1,2 +1,2 @@
 log_flag=l
-files="./zork_1.cor ./zork_2.cor"
+args="./zork_1.cor ./zork_2.cor"

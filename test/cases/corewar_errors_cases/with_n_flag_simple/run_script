@@ -1,3 +1,0 @@
-log_flag="l"
-files="-n 3 ./zork.cor"
-eixtcode_expect=0

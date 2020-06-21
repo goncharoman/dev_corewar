@@ -1,0 +1,1 @@
+args="-dump 50 ./Gagnant.cor ./helltrain.cor ./ex.cor ./jumper.cor"

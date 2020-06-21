@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 22:11:45 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/17 16:27:51 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/18 20:35:35 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void		run(t_vm *vm)
 			&& vm->cycles_count == (uint32_t)vm->dump_cycles)
 		{
 			show_arena(vm->arena);
+			remove_vm(vm);
 			exit(0);
 		}
 		next_cycle(vm);

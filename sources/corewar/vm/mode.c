@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:53:08 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/17 22:40:35 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/18 21:31:25 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,10 @@ int8_t			set_aff(t_vm *vm)
 static t_player	*load_player(t_vm *vm, int fd)
 {
 	t_player	*player;
-	char		buff;
 
 	player = create_player();
 	if (!(read_player(fd, player)))
 	{
-		while (read(fd, &buff, 1) != 0)
-			;
 		remove_player(&player);
 		error(vm, INVALID_FILE_ERR_MSG);
 	}
@@ -75,7 +72,7 @@ int8_t			set_champ(t_vm *vm, t_bool set_id, char *value,
 	if ((fd = open(champ_name, O_RDONLY)) < 0)
 		term(OPEN_PLAYER_ERR_MSG);
 	add_player(&vm->tmp_players_lst, (player = load_player(vm, fd)));
-	if (set_id)
+	if (set_id && player)
 		player->id = id;
 	return (set_id ? 3 : 1);
 }

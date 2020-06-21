@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:12:24 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/17 20:35:31 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/18 20:54:02 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		remove_vm(t_vm *vm)
 		ft_lstdel(&(vm->cursors), &remove_cursor_from_list);
 	if (vm->players_num > 0)
 		remove_players_array(vm->players, vm->players_num);
-	if (vm->tmp_players_lst != 0)
+	if (!vm->tmp_players_lst)
 		ft_lstdel(&vm->tmp_players_lst, &remove_player_from_lst);
 	ft_memdel((void**)&vm);
 }
