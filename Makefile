@@ -6,7 +6,7 @@
 #    By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 21:18:57 by ujyzene           #+#    #+#              #
-#    Updated: 2020/06/20 01:34:57 by ujyzene          ###   ########.fr        #
+#    Updated: 2020/06/23 21:29:43 by ujyzene          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ COMMON_NAME = common
 # PROJECT DIRECTORIES
 HEADERS_DIR = ./includes
 SOURCES_DIR = ./sources
-LIB_DIR = ./libft
+LIB_DIR = ./lib
 TEMP_DIR = ./temp
 
 # ASM

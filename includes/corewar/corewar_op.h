@@ -6,7 +6,7 @@
 /*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:03:17 by ujyzene           #+#    #+#             */
-/*   Updated: 2020/06/20 17:04:22 by ujyzene          ###   ########.fr       */
+/*   Updated: 2020/06/23 21:31:01 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_op		g_tab[OP_NUMS] = {
 		.args_typescode = true,
 		.args_types = {T_DIR | T_IND, T_REG, 0},
 		.tdir_size = 4,
-
+		.cycles_to_exec = 5,
 	},
 	{
 		.name = "st",

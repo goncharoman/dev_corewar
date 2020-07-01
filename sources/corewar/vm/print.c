@@ -29,6 +29,11 @@ void	print_representation(t_player **players)
 
 void	print_winner(t_vm *vm)
 {
-	ft_printf("Contestant %d, \"%s\", has won !\n",
-		vm->last_alive_player->id, vm->last_alive_player->name);
+	if (vm->last_alive_player)
+		ft_printf("Contestant %d, \"%s\", has won !\n",
+			vm->last_alive_player->id, vm->last_alive_player->name);
+	else
+		ft_printf("Contestant %d, \"%s\", has won !\n",
+			vm->players[vm->players_num - 1]->id,
+			vm->players[vm->players_num - 1]->name);
 }

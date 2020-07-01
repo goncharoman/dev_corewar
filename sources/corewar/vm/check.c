@@ -17,28 +17,55 @@ static void	reset_players_counters(t_vm *vm)
 	vm->live_count = 0;
 }
 
+static void	alive_cursors_head(t_list **cursors, uint32_t cycles,
+			int32_t cycles_to_die, t_bool logging)
+{
+	t_cursor	*cursor;
+	t_list		*next;
+
+	while (*cursors)
+	{
+		cursor = (*cursors)->content;
+		if (cycles_to_die <= 0 ||
+			cycles - cursor->alive_cycle >= (uint32_t)cycles_to_die)
+		{
+			next = (*cursors)->next;
+			if (logging)
+				log_cursor_death(cursor, cycles, cycles_to_die);
+			remove_cursor(&cursor);
+			free(*cursors);
+			*cursors = next;
+		}
+		else
+			break ;
+	}
+}
+
 static void	alive_cursors(t_list **cursors, uint32_t cycles,
 			int32_t cycles_to_die, t_bool logging)
 {
-	t_list		*tmp;
-	t_cursor	*curr;
+	t_cursor	*cursor;
+	t_list		*prev;
+	t_list		*curr;
 
-	if (!(tmp = *cursors))
+	alive_cursors_head(cursors, cycles, cycles_to_die, logging);
+	if (!(prev = *cursors))
 		return ;
-	curr = tmp->content;
-	if (cycles_to_die <= 0 ||
-		cycles - curr->alive_cycle >= (uint32_t)cycles_to_die)
+	while ((curr = prev->next))
 	{
-		if (logging)
-			log_cursor_death(curr, cycles, cycles_to_die);
-		remove_cursor(&curr);
-		tmp->content = NULL;
-		*cursors = tmp->next;
-		free(tmp);
-		alive_cursors(cursors, cycles, cycles_to_die, logging);
+		cursor = curr->content;
+		if (cycles_to_die <= 0 ||
+			cycles - cursor->alive_cycle >= (uint32_t)cycles_to_die)
+		{
+			prev->next = curr->next;
+			if (logging)
+				log_cursor_death(cursor, cycles, cycles_to_die);
+			remove_cursor(&cursor);
+			free(curr);
+			continue ;
+		}
+		prev = curr;
 	}
-	else
-		alive_cursors(&(tmp->next), cycles, cycles_to_die, logging);
 }
 
 void		cycles_to_die_check(t_vm *vm, int32_t *count, int32_t *check_counts)
