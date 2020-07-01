@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_output.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dschimme <dschimme@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/21 18:27:00 by dschimme          #+#    #+#             */
-/*   Updated: 2020/06/21 18:27:02 by dschimme         ###   ########.fr       */
+/*   Created: 2020/07/01 22:40:14 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/07/01 22:40:15 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

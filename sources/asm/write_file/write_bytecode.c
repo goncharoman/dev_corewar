@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_bytecode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dschimme <dschimme@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/21 18:29:00 by dschimme          #+#    #+#             */
-/*   Updated: 2020/06/21 18:29:04 by dschimme         ###   ########.fr       */
+/*   Created: 2020/07/01 22:44:26 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/07/01 22:44:27 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

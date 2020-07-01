@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_structs.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dschimme <dschimme@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/21 18:27:20 by dschimme          #+#    #+#             */
-/*   Updated: 2020/06/21 18:27:41 by dschimme         ###   ########.fr       */
+/*   Created: 2020/07/01 22:41:15 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/07/01 22:41:17 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

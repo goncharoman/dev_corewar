@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dschimme <dschimme@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: ujyzene <ujyzene@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/19 18:31:57 by dschimme          #+#    #+#             */
-/*   Updated: 2020/06/21 18:32:07 by dschimme         ###   ########.fr       */
+/*   Created: 2020/07/01 22:43:07 by ujyzene           #+#    #+#             */
+/*   Updated: 2020/07/01 22:43:08 by ujyzene          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
